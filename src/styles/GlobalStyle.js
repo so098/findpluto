@@ -21,6 +21,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button, input {
+    border: none;
+    background: none;
+    transition: all 0.2s;    
     cursor: pointer;
   }
 
@@ -39,11 +42,13 @@ const GlobalStyle = createGlobalStyle`
     vertical-align: middle;
   }
 
-  input {
-    border: none;
-    background: none;
+  button:focus, input:focus { outline: none; color: #fff; }
+
+  button:hover, input[type='submit']:hover {
+    background-color: #0fd1c92e;
+    box-shadow: 0 0 10px ${(props) => props.theme.color.titleColor};
   }
-  input:focus { outline: none; color: #fff; }
+
   #root {
     height: 100%;
   }

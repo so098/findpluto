@@ -91,13 +91,8 @@ const Form = styled.form`
     font-size: 16px;
     font-family: ${(props) => props.theme.font.titleFont};
     color: ${(props) => props.theme.color.titleColor};
-    transition: all 0.2s;
   }
 
-  input[type="submit"]:hover {
-    background-color: #0fd1c92e;
-    box-shadow: 0 0 10px ${(props) => props.theme.color.titleColor};
-  }
   div {
     margin-top: 20px;
   }

@@ -13,7 +13,7 @@ function Modal(props) {
           <main>{props.children}</main>
           <footer>
             <button className="close" onClick={close}>
-              close
+              확인
             </button>
           </footer>
         </section>
@@ -24,10 +24,12 @@ function Modal(props) {
 
 const ModalWrapper = styled.div`
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   text-align: center;
+  font-size: 20px;
+  font-weight: 500;
   color: ${(props) => props.theme.color.titleColor};
 
   .modal {
@@ -38,7 +40,7 @@ const ModalWrapper = styled.div`
     bottom: 0;
     left: 0;
     z-index: 99;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #141414c7;
   }
 
   .openModal {
@@ -46,46 +48,32 @@ const ModalWrapper = styled.div`
     align-items: center;
   }
   section {
-    width: 90%;
-    max-width: 450px;
     margin: 0 auto;
     border-radius: 0.3rem;
     overflow: hidden;
 
+    header {
+      margin-bottom: 10px;
+    }
+
     main {
-      border: 1px solid #eee;
-      padding: 20px;
+      border: 1px solid ${(props) => props.theme.color.titleColor};
+      width: 600px;
+      padding: 30px 0;
       box-sizing: border-box;
       background: #1414148a;
       line-height: 1.5;
-      font-size: 16px;
     }
   }
 
-  .modal button {
-    outline: none;
-    cursor: pointer;
-    border: 0;
+  .close {
+    margin-top: 10px;
+    padding: 8px 70px;
+    background: ${(props) => props.theme.color.titleColor};
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
   }
 `;
-
-// const modalShow = keyframes`
-//   from {
-//     opacity: 0;
-//     margin-top: -50px;
-//   }
-//   to {
-//     opacity: 1;
-//     margin-top: 0;
-//   }
-// `;
-// const modalBgShow = keyframes`
-//   from {
-//     opacity: 0;
-//   }
-//   to {
-//     opacity: 1;
-//   }
-// `;
 
 export default Modal;
