@@ -1,39 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 
+import createKey from "../../utils/createKey";
+import messages from "./resource/tutorialMessages";
+
 function ContactMessage() {
-  const messages = [
-    {
-      id: 1,
-      type: "당신이 말하고 있습니다..",
-      text: "여보세요 존?",
-    },
-    {
-      id: 2,
-      type: "존이 당신에게 말하고 있습니다..",
-      text: "어, 에리스 무슨일이야?",
-    },
-    {
-      id: 3,
-      type: "당신이 말하고 있습니다..",
-      text: "명왕성으로 갔다는 연락을 받았어.",
-    },
-  ];
+  const [count, setCount] = useState(0);
+
+  const handleOnClick = () => {
+    if (count === messages.length - 1) {
+      return;
+    }
+
+    setCount(count + 1);
+  };
+
   return (
     <>
+      <Notice key={createKey()}>{messages[count].type}</Notice>
       <MessageWrapper>
-        {messages.map((message, index) => {
-          return <p key={index}>{message.text}</p>;
-        })}
-        <ArrowWrapper>
+        <p key={createKey()}>{messages[count].text}</p>
+        <ArrowWrapper onClick={handleOnClick}>
           <IoMdArrowDropdown />
         </ArrowWrapper>
       </MessageWrapper>
     </>
   );
 }
+const Notice = styled.span`
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 500;
+  background: #080808;
+  color: ${(props) => props.theme.color.titleColor};
+  z-index: 2;
+`;
 
 const MessageWrapper = styled.div`
   position: absolute;
@@ -58,6 +67,7 @@ const ArrowWrapper = styled.div`
   position: absolute;
   bottom: 5px;
   right: 20px;
+  cursor: pointer;
 
   svg {
     width: 20px;
