@@ -3,6 +3,7 @@ import React from "react";
 import { OrbitControls } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+
 function Planet() {
   const texture = useLoader(THREE.TextureLoader, "/assets/earth.png");
 
