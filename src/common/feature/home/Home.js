@@ -10,6 +10,7 @@ function Home() {
   useBeforeunload((event) => {
     event.preventDefault();
   });
+
   return (
     <>
       <Canvas
