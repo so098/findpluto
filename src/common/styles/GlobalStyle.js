@@ -61,7 +61,7 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
     top:0;
     left:0;
-    background-image: url('/assets/neptune.png');
+    background: url('/assets/neptune.png') no-repeat center/cover;
   }
 `;
 

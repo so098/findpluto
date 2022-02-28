@@ -16,15 +16,18 @@ function Tutorial() {
   const [Count, setCount] = useState(0);
   const [textStart, setTextStart] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [contactMessageStart, setContactMessageStart] = useState(false);
   const [scriptCount, setScriptCount] = useState(0);
+  const [contactJohn, setContactJohn] = useState("");
   const tutorialScript = tutorialMessages();
-
+  // console.log("setScriptCount", setScriptCount, contactJohn);
   useEffect(() => {
     if (!modalOpen & textStart) {
       const interval = setInterval(() => {
         setText(Text + txt[Count]);
         setCount(Count + 1);
       }, 50);
+
       if (Count === txt.length) {
         clearInterval(interval);
       }
@@ -34,15 +37,27 @@ function Tutorial() {
     }
   });
 
+  // useEffect(() => {
+  //   if (Count === txt.length && Text) {
+  //     setTimeout(() => {
+  //       setTextStart(false);
+  //       setText("");
+  //       setModalOpen(true);
+  //     }, 1000);
+  //   }
+  // }, [Count]);
+
   useEffect(() => {
-    if (Count === txt.length && Text) {
+    if (!textStart && !modalOpen) {
       setTimeout(() => {
-        setTextStart(false);
-        setText("");
-        setModalOpen(true);
-      }, 1000);
+        setContactJohn("");
+        setContactMessageStart(true);
+      }, 2500);
     }
-  }, [Count]);
+
+    setContactJohn("존에게 연락 중입니다..");
+  }, [textStart, modalOpen]);
+
   const openModal = () => {
     setCount(0);
     setText("");
@@ -66,8 +81,10 @@ function Tutorial() {
       >
         <SpaceBackground />
       </Canvas>
-      {!textStart && !modalOpen && <Notice>존에게 연락 중입니다..</Notice>}
-      <ContactMessage setScriptCount={setScriptCount} />
+      {!textStart && !modalOpen && <Notice>{contactJohn}</Notice>}
+      {contactMessageStart && (
+        <ContactMessage setScriptCount={setScriptCount} />
+      )}
       <Naptune>
         <SpaceCraft speaker={tutorialScript[scriptCount].speaker} />
         <ScriptBox onClick={openModal}>
@@ -99,12 +116,14 @@ const ScriptBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 600px;
   padding: 20px 60px;
   font-size: 20px;
   text-align: center;
   text-shadow: 1px 1px 5px #000;
   line-height: 1.5;
   color: #fff;
+  cursor: pointer;
 `;
 
 const SpaceCraft = styled.div`
@@ -116,8 +135,8 @@ const SpaceCraft = styled.div`
   ${({ speaker }) => {
     return speaker === "me"
       ? `
-      background-image: url("/assets/spaceCraft.png")`
-      : `background-image: url("/assets/spaceCraft_purple.png")`;
+      background: url("/assets/spaceCraft.png") no-repeat center/cover`
+      : `background: url("/assets/spaceCraft_purple.png") no-repeat center/cover`;
   }};
   transition: all 0.2s;
 `;
