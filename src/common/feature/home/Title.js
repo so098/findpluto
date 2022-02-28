@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+import userNameStore from "../../module/userNameStore";
+
 function Title() {
+  const nameInput = useRef();
   const navigate = useNavigate();
+  const setUserName = userNameStore((state) => state.setUserName);
+
+  useEffect(() => {
+    nameInput.current.focus();
+  }, []);
+
   const handleSubmit = () => {
+    setUserName(nameInput.current.value);
     navigate("/tutorial");
   };
 
@@ -19,7 +29,12 @@ function Title() {
         <h2>Your name is...</h2>
         <div>
           <label>우주 비행사</label>
-          <input type="text" name="name" placeholder="에리스"></input>
+          <input
+            type="text"
+            name="name"
+            placeholder="에리스"
+            ref={nameInput}
+          ></input>
           <input type="submit" value="비행준비완료"></input>
         </div>
       </Form>

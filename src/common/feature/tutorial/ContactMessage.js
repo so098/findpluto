@@ -1,27 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 
 import createKey from "../../utils/createKey";
-import messages from "./resource/tutorialMessages";
+import tutorialMessages from "./resource/tutorialMessages";
 
-function ContactMessage() {
+function ContactMessage({ setScriptCount }) {
   const [count, setCount] = useState(0);
+  const tutorialScript = tutorialMessages();
 
   const handleOnClick = () => {
-    if (count === messages.length - 1) {
+    if (count === tutorialScript.length - 1) {
       return;
     }
-
     setCount(count + 1);
   };
 
+  useEffect(() => {
+    setScriptCount(count);
+  }, [count]);
+
   return (
     <>
-      <Notice key={createKey()}>{messages[count].type}</Notice>
-      <MessageWrapper>
-        <p key={createKey()}>{messages[count].text}</p>
+      <Notice key={createKey()} speaker={tutorialScript[count].speaker}>
+        {tutorialScript[count].type}
+      </Notice>
+      <MessageWrapper speaker={tutorialScript[count].speaker}>
+        <p key={createKey()}>{tutorialScript[count].text}</p>
         <ArrowWrapper onClick={handleOnClick}>
           <IoMdArrowDropdown />
         </ArrowWrapper>
@@ -40,7 +46,15 @@ const Notice = styled.span`
   font-size: 20px;
   font-weight: 500;
   background: #080808;
-  color: ${(props) => props.theme.color.titleColor};
+  ${({ speaker }) => {
+    return speaker === "me"
+      ? `
+      color: #0fd1c9;
+      `
+      : `
+      color: #c213fd;
+      `;
+  }};
   z-index: 2;
 `;
 
@@ -52,14 +66,23 @@ const MessageWrapper = styled.div`
   display: inline-block;
   width: 900px;
   padding: 5px 10px;
-  border: 1px solid #0fd1c9;
   padding: 30px 20px;
   box-sizing: border-box;
   background: #141414e0;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
-  color: #0fd1c9;
+  ${({ speaker }) => {
+    return speaker === "me"
+      ? `
+      border: 1px solid #0fd1c9;
+      color: #0fd1c9;
+      `
+      : `
+      border: 1px solid #c213fd;
+      color: #c213fd;
+      `;
+  }};
   z-index: 2;
 `;
 

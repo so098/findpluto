@@ -41,6 +41,7 @@ const ModalWrapper = styled.div`
     left: 0;
     z-index: 99;
     background-color: #141414c7;
+    transition: all 0.2s;
   }
 
   .openModal {

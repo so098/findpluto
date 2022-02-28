@@ -27,6 +27,10 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  input[type='text'] {
+    color: #fff;
+  }
+
   li {
     list-style: none;
   }

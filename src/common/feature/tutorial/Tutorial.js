@@ -7,6 +7,7 @@ import Naptune from "../../components/Naptune";
 import SpaceBackground from "../../components/SpaceBackground";
 import ContactMessage from "./ContactMessage";
 import DescriptionModal from "./DescriptionModal";
+import tutorialMessages from "./resource/tutorialMessages";
 
 function Tutorial() {
   const txt =
@@ -15,6 +16,8 @@ function Tutorial() {
   const [Count, setCount] = useState(0);
   const [textStart, setTextStart] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [scriptCount, setScriptCount] = useState(0);
+  const tutorialScript = tutorialMessages();
 
   useEffect(() => {
     if (!modalOpen & textStart) {
@@ -37,10 +40,9 @@ function Tutorial() {
         setTextStart(false);
         setText("");
         setModalOpen(true);
-      }, 700);
+      }, 1000);
     }
   }, [Count]);
-
   const openModal = () => {
     setCount(0);
     setText("");
@@ -65,11 +67,9 @@ function Tutorial() {
         <SpaceBackground />
       </Canvas>
       {!textStart && !modalOpen && <Notice>존에게 연락 중입니다..</Notice>}
-      <ContactMessage />
+      <ContactMessage setScriptCount={setScriptCount} />
       <Naptune>
-        <div>
-          <img src="/assets/spaceCraft.png" />
-        </div>
+        <SpaceCraft speaker={tutorialScript[scriptCount].speaker} />
         <ScriptBox onClick={openModal}>
           <p>{Text}</p>
         </ScriptBox>
@@ -107,4 +107,18 @@ const ScriptBox = styled.div`
   color: #fff;
 `;
 
+const SpaceCraft = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  ${({ speaker }) => {
+    return speaker === "me"
+      ? `
+      background-image: url("/assets/spaceCraft.png")`
+      : `background-image: url("/assets/spaceCraft_purple.png")`;
+  }};
+  transition: all 0.2s;
+`;
 export default Tutorial;
