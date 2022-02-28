@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useBeforeunload } from "react-beforeunload";
 
-import SpaceBackground from "../../components/SpaceBackground";
+import SpaceBackground from "../../common/components/SpaceBackground";
 import Title from "./Title";
 
 function Home() {

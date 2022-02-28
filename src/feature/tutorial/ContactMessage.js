@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 
-import createKey from "../../utils/createKey";
+import createKey from "../../common/utils/createKey";
 import tutorialMessages from "./resource/tutorialMessages";
 
 function ContactMessage({ setScriptCount }) {

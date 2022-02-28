@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 
-import Naptune from "../../components/Naptune";
-import SpaceBackground from "../../components/SpaceBackground";
+import Naptune from "../../common/components/Naptune";
+import SpaceBackground from "../../common/components/SpaceBackground";
 import ContactMessage from "./ContactMessage";
 import DescriptionModal from "./DescriptionModal";
 import tutorialMessages from "./resource/tutorialMessages";
@@ -24,7 +24,7 @@ function Tutorial() {
       const interval = setInterval(() => {
         setText(Text + txt[Count]);
         setCount(Count + 1);
-      }, 100);
+      }, 50);
       if (Count === txt.length) {
         clearInterval(interval);
       }
