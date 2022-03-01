@@ -5,17 +5,27 @@ import styled from "styled-components";
 
 import createKey from "../../common/utils/createKey";
 import chooseConversation from "./resource/chooseConversation";
+import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
 
 function ContactMessage({ setScriptCount }) {
   const [count, setCount] = useState(0);
+  const [speakStart, setSpeakStart] = useState(0);
+  const [isJohnSays, setJohnSays] = useState(false);
   const tutorialScript = tutorialMessages();
+  const choiceConversation = chooseConversation();
+  const johnSayConversation = speakJohnConversation();
 
   const handleOnClick = () => {
     if (count === tutorialScript.length - 1) {
       return;
     }
     setCount(count + 1);
+  };
+
+  const handleChoiceMessage = (e) => {
+    setJohnSays((isOpen) => !isOpen);
+    setSpeakStart(Number(e.target.id));
   };
 
   useEffect(() => {
@@ -25,19 +35,38 @@ function ContactMessage({ setScriptCount }) {
   return (
     <>
       <ChoiceMessages>
-        {chooseConversation()[0].answers.map((answer) => {
-          return (
-            <div className="choiceMessage" key={createKey()}>
-              {answer.content}
-            </div>
-          );
-        })}
+        {!isJohnSays ? (
+          choiceConversation[speakStart].answers.map((answer) => {
+            return (
+              <>
+                <span>{answer.type}</span>
+                <div
+                  className="choiceMessage user"
+                  key={createKey()}
+                  id={answer.to}
+                  onClick={handleChoiceMessage}
+                >
+                  {answer.content}
+                </div>
+              </>
+            );
+          })
+        ) : (
+          <div
+            className="choiceMessage john"
+            key={createKey()}
+            id={johnSayConversation[speakStart].to}
+            onClick={handleChoiceMessage}
+          >
+            {johnSayConversation[speakStart].content}
+          </div>
+        )}
       </ChoiceMessages>
-      <Notice key={createKey()} speaker={tutorialScript[count].speaker}>
+      <Notice speaker={tutorialScript[count].speaker}>
         {tutorialScript[count].type}
       </Notice>
       <MessageWrapper speaker={tutorialScript[count].speaker}>
-        <p key={createKey()}>{tutorialScript[count].text}</p>
+        <p>{tutorialScript[count].text}</p>
         <ArrowWrapper onClick={handleOnClick}>
           <IoMdArrowDropdown />
         </ArrowWrapper>
@@ -48,7 +77,7 @@ function ContactMessage({ setScriptCount }) {
 
 const Notice = styled.span`
   position: absolute;
-  top: 16%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
@@ -106,17 +135,26 @@ const ChoiceMessages = styled.div`
   font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
-  color: ${(props) => props.theme.color.titleColor};
+
   z-index: 3;
 
   .choiceMessage {
     width: 900px;
-    border: 1px solid ${(props) => props.theme.color.titleColor};
     margin: 34px;
     padding: 28px 38px;
     box-sizing: border-box;
     background: #141414e0;
     cursor: pointer;
+  }
+
+  .user {
+    border: 1px solid ${(props) => props.theme.color.titleColor};
+    color: ${(props) => props.theme.color.titleColor};
+  }
+
+  .john {
+    border: 1px solid ${(props) => props.theme.color.titlePurpleColor};
+    color: ${(props) => props.theme.color.titlePurpleColor};
   }
 `;
 
@@ -127,7 +165,9 @@ const ArrowWrapper = styled.div`
   cursor: pointer;
 
   svg {
-    width: 20px;
+    path {
+      color: #fff;
+    }
   }
 `;
 

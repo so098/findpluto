@@ -20,7 +20,7 @@ function Tutorial() {
   const [scriptCount, setScriptCount] = useState(0);
   const [contactJohn, setContactJohn] = useState("");
   const tutorialScript = tutorialMessages();
-  // console.log("setScriptCount", setScriptCount, contactJohn);
+
   useEffect(() => {
     if (!modalOpen & textStart) {
       const interval = setInterval(() => {
@@ -98,7 +98,7 @@ function Tutorial() {
 
 const Notice = styled.span`
   position: absolute;
-  top: 16%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
