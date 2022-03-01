@@ -4,6 +4,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 
 import createKey from "../../common/utils/createKey";
+import clueStore from "../../module/clueStore";
 import chooseConversation from "./resource/chooseConversation";
 import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
@@ -12,10 +13,12 @@ function ContactMessage({ setScriptCount }) {
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
   const [isJohnSays, setJohnSays] = useState(false);
+  // const [test, setIsTest] = useState();
   const tutorialScript = tutorialMessages();
   const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
-
+  const setClue = clueStore((state) => state.setClue);
+  const clues = clueStore((state) => state.clues);
   const handleOnClick = () => {
     if (count === tutorialScript.length - 1) {
       return;
@@ -23,7 +26,13 @@ function ContactMessage({ setScriptCount }) {
     setCount(count + 1);
   };
 
-  const handleChoiceMessage = (e) => {
+  const handleChoiceMessage = (e, clue) => {
+    if (!e.target.id) {
+      setClue(clue);
+
+      return;
+    }
+
     setJohnSays((isOpen) => !isOpen);
     setSpeakStart(Number(e.target.id));
   };
@@ -35,31 +44,36 @@ function ContactMessage({ setScriptCount }) {
   return (
     <>
       <ChoiceMessages>
+        <p>{clues}</p>
         {!isJohnSays ? (
           choiceConversation[speakStart].answers.map((answer) => {
             return (
-              <>
+              <div key={createKey()}>
                 <span>{answer.type}</span>
                 <div
                   className="choiceMessage user"
-                  key={createKey()}
                   id={answer.to}
                   onClick={handleChoiceMessage}
                 >
                   {answer.content}
                 </div>
-              </>
+              </div>
             );
           })
         ) : (
-          <div
-            className="choiceMessage john"
-            key={createKey()}
-            id={johnSayConversation[speakStart].to}
-            onClick={handleChoiceMessage}
-          >
-            {johnSayConversation[speakStart].content}
-          </div>
+          <>
+            <span>{johnSayConversation[speakStart].type}</span>
+            <div
+              className="choiceMessage john"
+              key={createKey()}
+              id={johnSayConversation[speakStart].to}
+              onClick={(e) => {
+                handleChoiceMessage(e, johnSayConversation[speakStart].clue);
+              }}
+            >
+              {johnSayConversation[speakStart].content}
+            </div>
+          </>
         )}
       </ChoiceMessages>
       <Notice speaker={tutorialScript[count].speaker}>
