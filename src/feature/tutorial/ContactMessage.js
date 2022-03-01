@@ -12,8 +12,7 @@ import tutorialMessages from "./resource/tutorialMessages";
 function ContactMessage({ setScriptCount }) {
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
-  const [isJohnSays, setJohnSays] = useState(false);
-  // const [test, setIsTest] = useState();
+  const [isJohnSays, setIsJohnSays] = useState(false);
   const tutorialScript = tutorialMessages();
   const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
@@ -33,7 +32,7 @@ function ContactMessage({ setScriptCount }) {
       return;
     }
 
-    setJohnSays((isOpen) => !isOpen);
+    setIsJohnSays((isJohnSays) => !isJohnSays);
     setSpeakStart(Number(e.target.id));
   };
 
