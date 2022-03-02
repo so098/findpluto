@@ -44,8 +44,14 @@ function Tutorial() {
       }, 2500);
     }
 
+    if (Count === txt.length) {
+      setTimeout(() => {
+        openModal();
+      }, 2000);
+    }
+
     setContactJohn("존에게 연락 중입니다..");
-  }, [textStart, modalOpen]);
+  }, [textStart, modalOpen, Count]);
 
   const openModal = () => {
     setCount(0);
@@ -103,7 +109,6 @@ const ScriptBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
   padding: 20px 60px;
   font-size: 20px;
   text-align: center;
