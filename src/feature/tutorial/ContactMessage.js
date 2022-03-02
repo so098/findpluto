@@ -32,7 +32,6 @@ function ContactMessage({ setSpeaker }) {
   const handleChoiceMessage = (e, clue, speaker) => {
     if (!e.target.id) {
       setClue(clue);
-
       return;
     }
 
@@ -57,7 +56,7 @@ function ContactMessage({ setSpeaker }) {
                   className="choiceMessage me"
                   id={answer.to}
                   onClick={(e) => {
-                    handleChoiceMessage(e, "", "john");
+                    handleChoiceMessage(e, answer.clues, "john");
                   }}
                 >
                   {answer.content}
@@ -75,6 +74,11 @@ function ContactMessage({ setSpeaker }) {
                       })}
                   </ul>
                 </div>
+                {answer.clues && (
+                  <StartedPluto>
+                    단서 클릭시 명왕성으로 출발합니다.
+                  </StartedPluto>
+                )}
               </section>
             );
           })}
@@ -215,4 +219,8 @@ const ArrowWrapper = styled.div`
   cursor: pointer;
 `;
 
+const StartedPluto = styled.div`
+  text-align: center;
+  color: ${(props) => props.theme.color.titleColor};
+`;
 export default ContactMessage;
