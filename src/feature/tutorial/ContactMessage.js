@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { IoMdArrowDropdown } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import createKey from "../../common/utils/createKey";
@@ -10,6 +11,7 @@ import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
 
 function ContactMessage({ setSpeaker }) {
+  const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
   const [isJohnSays, setIsJohnSays] = useState(false);
@@ -32,6 +34,7 @@ function ContactMessage({ setSpeaker }) {
   const handleChoiceMessage = (e, clue, speaker) => {
     if (!e.target.id) {
       setClue(clue);
+      navigate("/findJohn");
       return;
     }
 

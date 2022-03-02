@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import Naptune from "../../common/components/Naptune";
 import SpaceBackground from "../../common/components/SpaceBackground";
+import SpaceCraft from "../../common/components/SpaceCraft";
 import ContactMessage from "./ContactMessage";
 import DescriptionModal from "./DescriptionModal";
 
@@ -112,18 +113,4 @@ const ScriptBox = styled.div`
   cursor: pointer;
 `;
 
-const SpaceCraft = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  ${({ speaker }) => {
-    return speaker === "me"
-      ? `
-      background: url("/assets/spaceCraft.png") no-repeat center/cover`
-      : `background: url("/assets/spaceCraft_purple.png") no-repeat center/cover`;
-  }};
-  transition: all 0.2s;
-`;
 export default Tutorial;
