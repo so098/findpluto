@@ -1,26 +1,25 @@
 import React, { useState } from "react";
 
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import createKey from "../../common/utils/createKey";
 import clueStore from "../../module/clueStore";
+import LodingPage from "./LodingPage";
 import chooseConversation from "./resource/chooseConversation";
 import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
 
 function ContactMessage({ setSpeaker }) {
-  const navigate = useNavigate();
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
   const [isJohnSays, setIsJohnSays] = useState(false);
   const [isChoiceStart, setIsChoiceStart] = useState(false);
+  const [isLoding, setIsLoding] = useState(false);
   const tutorialScript = tutorialMessages();
   const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
   const setClue = clueStore((state) => state.setClue);
-  const clues = clueStore((state) => state.clues);
 
   const handleOnClick = (speaker) => {
     if (count === tutorialScript.length - 1) {
@@ -34,7 +33,7 @@ function ContactMessage({ setSpeaker }) {
   const handleChoiceMessage = (e, clue, speaker) => {
     if (!e.target.id) {
       setClue(clue);
-      navigate("/findJohn");
+      setIsLoding(true);
       return;
     }
 
@@ -45,8 +44,8 @@ function ContactMessage({ setSpeaker }) {
 
   return (
     <>
+      {isLoding && <LodingPage />}
       <ChoiceMessages>
-        <p>{clues}</p>
         {isChoiceStart &&
           !isJohnSays &&
           choiceConversation[speakStart].answers.map((answer) => {
@@ -109,7 +108,7 @@ function ContactMessage({ setSpeaker }) {
       </ChoiceMessages>
       {!isChoiceStart && (
         <>
-          <Notice top="122" speaker={tutorialScript[count].speaker}>
+          <Notice top="132" speaker={tutorialScript[count].speaker}>
             {tutorialScript[count].type}
           </Notice>
           <MessageWrapper speaker={tutorialScript[count].speaker}>

@@ -31,7 +31,7 @@ const ModalWrapper = styled.div`
   font-size: 20px;
   font-weight: 500;
   color: ${(props) => props.theme.color.titleColor};
-
+  z-index: 10;
   .modal {
     display: none;
     position: fixed;
@@ -55,6 +55,7 @@ const ModalWrapper = styled.div`
 
     header {
       margin-bottom: 10px;
+      text-shadow: 1px 1px 1px #000;
     }
 
     main {
@@ -62,7 +63,7 @@ const ModalWrapper = styled.div`
       width: 600px;
       padding: 30px 0;
       box-sizing: border-box;
-      background: #1414148a;
+      background: #141414cf;
       line-height: 1.5;
     }
   }
