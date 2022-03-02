@@ -7,7 +7,6 @@ import Naptune from "../../common/components/Naptune";
 import SpaceBackground from "../../common/components/SpaceBackground";
 import ContactMessage from "./ContactMessage";
 import DescriptionModal from "./DescriptionModal";
-import tutorialMessages from "./resource/tutorialMessages";
 
 function Tutorial() {
   const txt =
@@ -17,9 +16,8 @@ function Tutorial() {
   const [textStart, setTextStart] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [contactMessageStart, setContactMessageStart] = useState(false);
-  const [scriptCount, setScriptCount] = useState(0);
+  const [speaker, setSpeaker] = useState("me");
   const [contactJohn, setContactJohn] = useState("");
-  const tutorialScript = tutorialMessages();
 
   useEffect(() => {
     if (!modalOpen & textStart) {
@@ -36,16 +34,6 @@ function Tutorial() {
       };
     }
   });
-
-  // useEffect(() => {
-  //   if (Count === txt.length && Text) {
-  //     setTimeout(() => {
-  //       setTextStart(false);
-  //       setText("");
-  //       setModalOpen(true);
-  //     }, 1000);
-  //   }
-  // }, [Count]);
 
   useEffect(() => {
     if (!textStart && !modalOpen) {
@@ -82,11 +70,9 @@ function Tutorial() {
         <SpaceBackground />
       </Canvas>
       {!textStart && !modalOpen && <Notice>{contactJohn}</Notice>}
-      {contactMessageStart && (
-        <ContactMessage setScriptCount={setScriptCount} />
-      )}
+      {contactMessageStart && <ContactMessage setSpeaker={setSpeaker} />}
       <Naptune>
-        <SpaceCraft speaker={tutorialScript[scriptCount].speaker} />
+        <SpaceCraft speaker={speaker} />
         <ScriptBox onClick={openModal}>
           <p>{Text}</p>
         </ScriptBox>
@@ -98,7 +84,7 @@ function Tutorial() {
 
 const Notice = styled.span`
   position: absolute;
-  top: 8%;
+  top: 13%;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;

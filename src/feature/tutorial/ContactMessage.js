@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
@@ -9,23 +9,27 @@ import chooseConversation from "./resource/chooseConversation";
 import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
 
-function ContactMessage({ setScriptCount }) {
+function ContactMessage({ setSpeaker }) {
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
   const [isJohnSays, setIsJohnSays] = useState(false);
+  const [isChoiceStart, setIsChoiceStart] = useState(false);
   const tutorialScript = tutorialMessages();
   const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
   const setClue = clueStore((state) => state.setClue);
   const clues = clueStore((state) => state.clues);
-  const handleOnClick = () => {
+
+  const handleOnClick = (speaker) => {
     if (count === tutorialScript.length - 1) {
+      setIsChoiceStart(true);
       return;
     }
     setCount(count + 1);
+    setSpeaker(speaker);
   };
 
-  const handleChoiceMessage = (e, clue) => {
+  const handleChoiceMessage = (e, clue, speaker) => {
     if (!e.target.id) {
       setClue(clue);
 
@@ -34,63 +38,92 @@ function ContactMessage({ setScriptCount }) {
 
     setIsJohnSays((isJohnSays) => !isJohnSays);
     setSpeakStart(Number(e.target.id));
+    setSpeaker(speaker);
   };
-
-  useEffect(() => {
-    setScriptCount(count);
-  }, [count]);
 
   return (
     <>
       <ChoiceMessages>
         <p>{clues}</p>
-        {!isJohnSays ? (
+        {isChoiceStart &&
+          !isJohnSays &&
           choiceConversation[speakStart].answers.map((answer) => {
             return (
-              <div key={createKey()}>
-                <span>{answer.type}</span>
+              <section key={createKey()}>
+                <Notice top="-170" speaker="john">
+                  {answer.type}
+                </Notice>
                 <div
-                  className="choiceMessage user"
+                  className="choiceMessage me"
                   id={answer.to}
-                  onClick={handleChoiceMessage}
+                  onClick={(e) => {
+                    handleChoiceMessage(e, "", "john");
+                  }}
                 >
                   {answer.content}
+                  {answer.clues && (
+                    <span>단서 {answer.clues.length}개 획득</span>
+                  )}
+                  <ul>
+                    {answer.clues &&
+                      answer.clues.map((clue, index) => {
+                        return (
+                          <li key={createKey()}>
+                            {index + 1}. {clue}
+                          </li>
+                        );
+                      })}
+                  </ul>
                 </div>
-              </div>
+              </section>
             );
-          })
-        ) : (
-          <>
-            <span>{johnSayConversation[speakStart].type}</span>
+          })}
+        {isChoiceStart && isJohnSays && (
+          <section>
+            <Notice top="-170" speaker="me">
+              {johnSayConversation[speakStart].type}
+            </Notice>
             <div
               className="choiceMessage john"
               key={createKey()}
               id={johnSayConversation[speakStart].to}
               onClick={(e) => {
-                handleChoiceMessage(e, johnSayConversation[speakStart].clue);
+                handleChoiceMessage(
+                  e,
+                  johnSayConversation[speakStart].clue,
+                  "me"
+                );
               }}
             >
               {johnSayConversation[speakStart].content}
             </div>
-          </>
+          </section>
         )}
       </ChoiceMessages>
-      <Notice speaker={tutorialScript[count].speaker}>
-        {tutorialScript[count].type}
-      </Notice>
-      <MessageWrapper speaker={tutorialScript[count].speaker}>
-        <p>{tutorialScript[count].text}</p>
-        <ArrowWrapper onClick={handleOnClick}>
-          <IoMdArrowDropdown />
-        </ArrowWrapper>
-      </MessageWrapper>
+      {!isChoiceStart && (
+        <>
+          <Notice top="122" speaker={tutorialScript[count].speaker}>
+            {tutorialScript[count].type}
+          </Notice>
+          <MessageWrapper speaker={tutorialScript[count].speaker}>
+            <p>{tutorialScript[count].text}</p>
+            <ArrowWrapper
+              onClick={() => {
+                handleOnClick(tutorialScript[count].speaker);
+              }}
+            >
+              <IoMdArrowDropdown />
+            </ArrowWrapper>
+          </MessageWrapper>
+        </>
+      )}
     </>
   );
 }
 
 const Notice = styled.span`
   position: absolute;
-  top: 8%;
+  top: ${(props) => props.top}px;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
@@ -99,8 +132,9 @@ const Notice = styled.span`
   font-size: 20px;
   font-weight: 500;
   background: #080808;
+
   ${({ speaker }) => {
-    return speaker === "me"
+    return speaker === "john"
       ? `
       color: #0fd1c9;
       `
@@ -126,7 +160,7 @@ const MessageWrapper = styled.div`
   font-weight: 500;
   line-height: 1.5;
   ${({ speaker }) => {
-    return speaker === "me"
+    return speaker === "john"
       ? `
       border: 1px solid #0fd1c9;
       color: #0fd1c9;
@@ -160,12 +194,15 @@ const ChoiceMessages = styled.div`
     cursor: pointer;
   }
 
-  .user {
+  .me {
     border: 1px solid ${(props) => props.theme.color.titleColor};
     color: ${(props) => props.theme.color.titleColor};
   }
 
   .john {
+    display: flex;
+    align-items: center;
+    height: 200px;
     border: 1px solid ${(props) => props.theme.color.titlePurpleColor};
     color: ${(props) => props.theme.color.titlePurpleColor};
   }
@@ -176,12 +213,6 @@ const ArrowWrapper = styled.div`
   bottom: 5px;
   right: 20px;
   cursor: pointer;
-
-  svg {
-    path {
-      color: #fff;
-    }
-  }
 `;
 
 export default ContactMessage;
