@@ -91,7 +91,7 @@ function Tutorial() {
 
 const Notice = styled.span`
   position: absolute;
-  top: 13%;
+  top: 8.5%;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;

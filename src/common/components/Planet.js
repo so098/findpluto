@@ -11,8 +11,8 @@ function Planet({ image, refNone }) {
 
   useFrame(() => {
     if (!refNone) {
-      planetAnimation.current.rotation.x += 0.0025;
-      planetAnimation.current.rotation.y += 0.0005;
+      planetAnimation.current.rotation.x += 0.0004;
+      planetAnimation.current.rotation.y += 0.0035;
     }
   });
 

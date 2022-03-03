@@ -51,7 +51,7 @@ function ContactMessage({ setSpeaker }) {
           choiceConversation[speakStart].answers.map((answer) => {
             return (
               <section key={createKey()}>
-                <Notice top="-170" speaker="john">
+                <Notice top="8" speaker="john">
                   {answer.type}
                 </Notice>
                 <div
@@ -63,7 +63,9 @@ function ContactMessage({ setSpeaker }) {
                 >
                   {answer.content}
                   {answer.clues && (
-                    <span>단서 {answer.clues.length}개 획득</span>
+                    <ClueNumberWrapper>
+                      단서 {answer.clues.length}개 획득
+                    </ClueNumberWrapper>
                   )}
                   <ul>
                     {answer.clues &&
@@ -75,6 +77,9 @@ function ContactMessage({ setSpeaker }) {
                         );
                       })}
                   </ul>
+                  {answer.clues && answer.clues.length === 0 && (
+                    <p>단서 없음.</p>
+                  )}
                 </div>
                 {answer.clues && (
                   <StartedPluto>
@@ -86,7 +91,7 @@ function ContactMessage({ setSpeaker }) {
           })}
         {isChoiceStart && isJohnSays && (
           <section>
-            <Notice top="-170" speaker="me">
+            <Notice top="8" speaker="me">
               {johnSayConversation[speakStart].type}
             </Notice>
             <div
@@ -108,7 +113,7 @@ function ContactMessage({ setSpeaker }) {
       </ChoiceMessages>
       {!isChoiceStart && (
         <>
-          <Notice top="132" speaker={tutorialScript[count].speaker}>
+          <Notice top="9" speaker={tutorialScript[count].speaker}>
             {tutorialScript[count].type}
           </Notice>
           <MessageWrapper speaker={tutorialScript[count].speaker}>
@@ -129,12 +134,12 @@ function ContactMessage({ setSpeaker }) {
 
 const Notice = styled.span`
   position: absolute;
-  top: ${(props) => props.top}px;
+  top: ${(props) => props.top}%;
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
   border-radius: 20px;
-  padding: 5px 10px;
+  padding: 0 10px;
   font-size: 20px;
   font-weight: 500;
   background: #080808;
@@ -158,13 +163,13 @@ const MessageWrapper = styled.div`
   transform: translateX(-50%);
   display: inline-block;
   width: 900px;
-  padding: 5px 10px;
   padding: 30px 20px;
   box-sizing: border-box;
   background: #141414e0;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
+
   ${({ speaker }) => {
     return speaker === "john"
       ? `
@@ -176,19 +181,22 @@ const MessageWrapper = styled.div`
       color: #c213fd;
       `;
   }};
-  z-index: 2;
+  z-index: 3;
 `;
 
 const ChoiceMessages = styled.div`
   position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
-
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   z-index: 3;
 
   .choiceMessage {
@@ -224,5 +232,12 @@ const ArrowWrapper = styled.div`
 const StartedPluto = styled.div`
   text-align: center;
   color: ${(props) => props.theme.color.titleColor};
+`;
+
+const ClueNumberWrapper = styled.h2`
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid ${(props) => props.theme.color.titleColor};
 `;
 export default ContactMessage;
