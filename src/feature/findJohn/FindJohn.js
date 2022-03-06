@@ -3,6 +3,7 @@ import React, { Suspense, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 
+import Planet from "../../common/components/Planet";
 import SpaceBackground from "../../common/components/SpaceBackground";
 import SpaceCraft from "../../common/components/SpaceCraft";
 import createKey from "../../common/utils/createKey";
@@ -30,14 +31,140 @@ function FindJohn() {
             <ambientLight intensity={0.5} />
             <spotLight
               intensity={5}
-              position={[20, 20, 20]}
-              shadow-bias={-0.00005}
-              angle={Math.PI / 6}
-              shadow-mapSize-width={2048}
-              shadow-mapSize-height={2048}
+              position={[10, 10, 20]}
+              angle={Math.PI / 2}
               castShadow
             />
-            <SpaceBackground image="/assets/pluto.jpg" refNone="refNone" />
+            <SpaceBackground />
+            <mesh position={[1.9, 1.5, 1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.2, 1, 1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2, 1.1, 1.3]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+
+            <mesh position={[-1, 2, 1.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="red" />
+            </mesh>
+            <mesh position={[-1.5, 1.7, 1.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="red" />
+            </mesh>
+            <mesh position={[-1.5, 2, 0.9]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="red" />
+            </mesh>
+            <mesh position={[-2.4, 0.5, -1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="orange" />
+            </mesh>
+            <mesh position={[-2.3, 1.2, 0.2]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="orange" />
+            </mesh>
+            <mesh position={[-2.5, 0.7, -0.5]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="orange" />
+            </mesh>
+            <mesh position={[-2.6, 0.4, 0.3]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="orange" />
+            </mesh>
+            <mesh position={[-1.4, -2.2, 0.2]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="orange" />
+            </mesh>
+            <mesh position={[1.4, 2, -1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[1.8, 1.9, -0.2]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[1.9, 1.7, -0.5]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[1.6, 1.9, -0.8]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.5, 0.4, 0.6]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.5, 0.1, 0.6]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.6, 0.1, 0.1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.3, 0.7, 1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            <mesh position={[2.1, 0.7, 1.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+
+            <mesh position={[1.7, 2, -0.025]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="green" />
+            </mesh>
+            {/* 여기부터 빛의 뒷편 */}
+            <mesh position={[1.6, 1, -1.9]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+
+            <mesh position={[1.6, 0.7, -2]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[1.9, 0.1, -1.9]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[1.2, 0, -2.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[2.2, -0.3, -1.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[1.5, 0.4, -2.1]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[0.3, -0.2, -2.6]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[0.1, -0.5, -2.6]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[0.5, -0.6, -2.5]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <mesh position={[0.1, -1, -2.4]}>
+              <sphereGeometry args={[0.1, 50, 0.1]} />
+              <meshPhongMaterial color="#007671" />
+            </mesh>
+            <Planet image="/assets/pluto.jpg" refNone="refNone" />
           </Suspense>
         </Canvas>
       </CanvasWrapper>
@@ -57,10 +184,13 @@ function FindJohn() {
 }
 
 const CanvasWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
   z-index: 9;
 `;
 
