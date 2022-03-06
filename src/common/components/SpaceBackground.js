@@ -3,9 +3,7 @@ import React, { useRef } from "react";
 import { Stars } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-import Planet from "./Planet";
-
-function SpaceBackground({ image, refNone }) {
+function SpaceBackground() {
   const backgroundAnimation = useRef();
   useFrame(() => {
     backgroundAnimation.current.rotation.x += 0.0025;
@@ -23,7 +21,6 @@ function SpaceBackground({ image, refNone }) {
         depth={100}
         fade
       />
-      <Planet image={image} refNone={refNone} />
     </group>
   );
 }

@@ -7,7 +7,7 @@ import * as THREE from "three";
 function Planet({ image, refNone }) {
   const planetAnimation = useRef();
   const animationNone = useRef();
-  const texture = useLoader(THREE.TextureLoader, image || "/assets/earth.png");
+  const texture = useLoader(THREE.TextureLoader, image);
 
   useFrame(() => {
     if (!refNone) {
@@ -15,10 +15,10 @@ function Planet({ image, refNone }) {
       planetAnimation.current.rotation.y += 0.0035;
     }
   });
-
+  // autoRotate={false} enableZoom={false}
   return (
     <mesh ref={refNone ? animationNone : planetAnimation}>
-      <OrbitControls autoRotate={false} enableZoom={false} />
+      <OrbitControls />
       <sphereGeometry args={[2.5, 32, 32]} />
       <meshStandardMaterial map={texture} />
     </mesh>
