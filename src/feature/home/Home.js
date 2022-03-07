@@ -5,6 +5,7 @@ import { useBeforeunload } from "react-beforeunload";
 
 import Planet from "../../common/components/Planet";
 import SpaceBackground from "../../common/components/SpaceBackground";
+import SpaceStar from "../../common/components/SpaceStar";
 import Title from "./Title";
 
 function Home() {
@@ -24,6 +25,7 @@ function Home() {
           <ambientLight intensity={0.5} />
           <spotLight position={[50, 15, 10]} angle={0.3} />
           <SpaceBackground />
+          <SpaceStar />
           <Planet image="/assets/earth.png" />
         </Suspense>
       </Canvas>
