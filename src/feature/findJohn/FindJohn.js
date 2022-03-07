@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
@@ -9,14 +9,64 @@ import SpaceCraft from "../../common/components/SpaceCraft";
 import createKey from "../../common/utils/createKey";
 import clueStore from "../../module/clueStore";
 import DescriptionModal from "../findJohn/DescriptionModal";
+import cluePositons from "./resource/cluePosition.json";
 
 function FindJohn() {
   const [modalOpen, setModalOpen] = useState(true);
+  const [locations, setLocations] = useState([]);
+  const [intersection, setIntersection] = useState([]);
   const clues = clueStore((state) => state.clues);
+  const symbols = clueStore((state) => state.symbols);
   const closeModal = () => {
     setModalOpen(false);
   };
 
+  useEffect(() => {
+    cluePositons.forEach((location) => {
+      if (symbols.includes(location.name) && location.positions) {
+        location.positions.forEach((positions) => {
+          setLocations((prev) => [...prev, positions]);
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const duplicationValues = [];
+
+    for (let i = 0; i < locations.length; i++) {
+      const result = [];
+      const tempId = locations[i].id;
+
+      for (let j = i; j < locations.length; j++) {
+        if (locations.length > 50) {
+          if (tempId !== locations[j].id) {
+            result.push(locations[j].id);
+          }
+        } else {
+          if (tempId === locations[j].id) {
+            result.push(locations[j].id);
+          }
+        }
+
+        if (result.length > 1) {
+          duplicationValues.push(...result);
+        }
+      }
+    }
+
+    const deletedDuplicationValues = [...new Set(duplicationValues)];
+
+    locations.forEach((location) => {
+      if (deletedDuplicationValues.includes(location.id)) {
+        setIntersection((prev) => [...prev, location]);
+      }
+    });
+  }, [locations]);
+
+  const handleClickMesh = (position) => {
+    console.log("position", position); //test
+  };
   return (
     <>
       <CanvasWrapper>
@@ -36,134 +86,18 @@ function FindJohn() {
               castShadow
             />
             <SpaceBackground />
-            <mesh position={[1.9, 1.5, 1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.2, 1, 1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2, 1.1, 1.3]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-
-            <mesh position={[-1, 2, 1.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="red" />
-            </mesh>
-            <mesh position={[-1.5, 1.7, 1.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="red" />
-            </mesh>
-            <mesh position={[-1.5, 2, 0.9]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="red" />
-            </mesh>
-            <mesh position={[-2.4, 0.5, -1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="orange" />
-            </mesh>
-            <mesh position={[-2.3, 1.2, 0.2]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="orange" />
-            </mesh>
-            <mesh position={[-2.5, 0.7, -0.5]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="orange" />
-            </mesh>
-            <mesh position={[-2.6, 0.4, 0.3]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="orange" />
-            </mesh>
-            <mesh position={[-1.4, -2.2, 0.2]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="orange" />
-            </mesh>
-            <mesh position={[1.4, 2, -1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[1.8, 1.9, -0.2]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[1.9, 1.7, -0.5]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[1.6, 1.9, -0.8]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.5, 0.4, 0.6]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.5, 0.1, 0.6]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.6, 0.1, 0.1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.3, 0.7, 1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            <mesh position={[2.1, 0.7, 1.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-
-            <mesh position={[1.7, 2, -0.025]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="green" />
-            </mesh>
-            {/* 여기부터 빛의 뒷편 */}
-            <mesh position={[1.6, 1, -1.9]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-
-            <mesh position={[1.6, 0.7, -2]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[1.9, 0.1, -1.9]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[1.2, 0, -2.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[2.2, -0.3, -1.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[1.5, 0.4, -2.1]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[0.3, -0.2, -2.6]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[0.1, -0.5, -2.6]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[0.5, -0.6, -2.5]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
-            <mesh position={[0.1, -1, -2.4]}>
-              <sphereGeometry args={[0.1, 50, 0.1]} />
-              <meshPhongMaterial color="#007671" />
-            </mesh>
+            {intersection.map((location) => {
+              return (
+                <mesh
+                  key={createKey()}
+                  position={location.position}
+                  onClick={() => handleClickMesh(location.position)}
+                >
+                  <sphereGeometry args={[0.1, 50, 0.1]} />
+                  <meshPhongMaterial color="#007671" />
+                </mesh>
+              );
+            })}
             <Planet image="/assets/pluto.jpg" refNone="refNone" />
           </Suspense>
         </Canvas>
