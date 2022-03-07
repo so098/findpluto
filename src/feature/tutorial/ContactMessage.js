@@ -20,6 +20,7 @@ function ContactMessage({ setSpeaker }) {
   const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
   const setClue = clueStore((state) => state.setClue);
+  const setSymbols = clueStore((state) => state.setSymbols);
 
   const handleOnClick = (speaker) => {
     if (count === tutorialScript.length - 1) {
@@ -30,9 +31,10 @@ function ContactMessage({ setSpeaker }) {
     setSpeaker(speaker);
   };
 
-  const handleChoiceMessage = (e, clue, speaker) => {
+  const handleChoiceMessage = (e, clue, speaker, symbols) => {
     if (!e.target.id) {
       setClue(clue);
+      setSymbols(symbols);
       setIsLoding(true);
       return;
     }
@@ -58,7 +60,12 @@ function ContactMessage({ setSpeaker }) {
                   className="choiceMessage me"
                   id={answer.to}
                   onClick={(e) => {
-                    handleChoiceMessage(e, answer.clues, "john");
+                    handleChoiceMessage(
+                      e,
+                      answer.clues,
+                      "john",
+                      answer.symbols
+                    );
                   }}
                 >
                   {answer.content}
