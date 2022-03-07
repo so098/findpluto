@@ -97,6 +97,7 @@ function chooseConversation() {
         {
           type: "존에게 단서를 한개 얻었습니다.",
           clues: ["바다 근처에 있다."],
+          symbols: ["ocean"],
         },
       ],
     },
@@ -105,6 +106,7 @@ function chooseConversation() {
         {
           type: "존에게 단서를 두개 얻었습니다.",
           clues: ["바다가 있는 곳에 있다.", "빛의 반대편에 있다."],
+          symbols: ["ocean", "darkSide"],
         },
       ],
     },
@@ -117,6 +119,7 @@ function chooseConversation() {
             "빛의 반대편에 있다.",
             "깃발을 꽂아두었다.",
           ],
+          symbols: ["ocean", "darkSide", "flag"],
         },
       ],
     },
@@ -129,6 +132,7 @@ function chooseConversation() {
             "빛이 들어오는 곳 근처에 있다.",
             "깃발을 꽂아두었다.",
           ],
+          symbols: ["ocean", "lightSide", "flag"],
         },
       ],
     },
@@ -137,6 +141,7 @@ function chooseConversation() {
         {
           type: "존에게 단서를 얻지 못했습니다.",
           clues: [],
+          symbols: ["ocean", "lightSide", "darkSide"],
         },
       ],
     },
