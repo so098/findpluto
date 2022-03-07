@@ -15,13 +15,15 @@ function Planet({ image, refNone }) {
       planetAnimation.current.rotation.y += 0.0035;
     }
   });
-  // autoRotate={false} enableZoom={false}
+
   return (
-    <mesh ref={refNone ? animationNone : planetAnimation}>
-      <OrbitControls />
-      <sphereGeometry args={[2.5, 32, 32]} />
-      <meshStandardMaterial map={texture} />
-    </mesh>
+    <>
+      <mesh ref={refNone ? animationNone : planetAnimation} enableZoom={false}>
+        <OrbitControls />
+        <sphereGeometry args={[2.5, 32, 32]} />
+        <meshStandardMaterial map={texture} />
+      </mesh>
+    </>
   );
 }
 
