@@ -3,10 +3,13 @@ import React from "react";
 import styled from "styled-components";
 
 function Modal(props) {
-  const { open, close, header, check, styleNone } = props;
+  const { open, close, header, check, styleNone, styled } = props;
 
   return (
-    <ModalWrapper className={open ? "openModal modal" : "modal"}>
+    <ModalWrapper
+      className={open ? "openModal modal" : "modal"}
+      styled={styled}
+    >
       {open ? (
         <>
           <Background />
@@ -14,9 +17,9 @@ function Modal(props) {
             <header>{header}</header>
             <Main styleNone={styleNone}>{props.children}</Main>
             <footer>
-              <button className="close" onClick={close}>
+              <Button onClick={close} styled={styled}>
                 {check}
-              </button>
+              </Button>
             </footer>
           </section>
         </>
@@ -39,7 +42,14 @@ const ModalWrapper = styled.div`
   text-align: center;
   font-size: 20px;
   font-weight: 500;
-  color: ${(props) => props.theme.color.titleColor};
+
+  ${({ styled }) => {
+    return styled
+      ? `color: #dc231e;`
+      : `
+      color: #0fd1c9;
+      `;
+  }};
   z-index: 99;
   .modal {
     display: none;
@@ -75,17 +85,23 @@ const ModalWrapper = styled.div`
       text-shadow: 1px 1px 1px #000;
     }
   }
-
-  .close {
-    margin-top: 10px;
-    padding: 8px 70px;
-    background: ${(props) => props.theme.color.titleColor};
-    font-size: 18px;
-    font-weight: 500;
-    color: #000;
-  }
 `;
 
+const Button = styled.button`
+  margin-top: 10px;
+  padding: 8px 70px;
+  background: ${(props) => props.theme.color.titleColor};
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  ${({ styled }) => {
+    return styled
+      ? `background: #dc231e;`
+      : `
+      background: #0fd1c9;
+      `;
+  }};
+`;
 const Main = styled.main`
   width: 600px;
   padding: 30px 0;
