@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react";
 
 import { Canvas } from "@react-three/fiber";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Planet from "../../common/components/Planet";
@@ -13,10 +14,13 @@ import cluePositons from "./resource/cluePosition.json";
 
 function FindJohn() {
   const [modalOpen, setModalOpen] = useState(true);
+  const [locationNames, setLocationNames] = useState([]);
   const [locations, setLocations] = useState([]);
   const [intersection, setIntersection] = useState([]);
   const clues = clueStore((state) => state.clues);
+  const setClueIndex = clueStore((state) => state.setClueIndex);
   const symbols = clueStore((state) => state.symbols);
+  const navigate = useNavigate();
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -25,6 +29,7 @@ function FindJohn() {
     cluePositons.forEach((location) => {
       if (symbols.includes(location.name) && location.positions) {
         location.positions.forEach((positions) => {
+          setLocationNames((prev) => [...prev, location.name]);
           setLocations((prev) => [...prev, positions]);
         });
       }
@@ -33,11 +38,11 @@ function FindJohn() {
 
   useEffect(() => {
     const duplicationValues = [];
+    const locationNameArray = [...new Set(locationNames)];
 
     for (let i = 0; i < locations.length; i++) {
       const result = [];
       const tempId = locations[i].id;
-
       for (let j = i; j < locations.length; j++) {
         if (locations.length > 50) {
           if (tempId !== locations[j].id) {
@@ -58,14 +63,19 @@ function FindJohn() {
     const deletedDuplicationValues = [...new Set(duplicationValues)];
 
     locations.forEach((location) => {
-      if (deletedDuplicationValues.includes(location.id)) {
+      if (locationNameArray.length > 1) {
+        if (deletedDuplicationValues.includes(location.id)) {
+          setIntersection((prev) => [...prev, location]);
+        }
+      } else {
         setIntersection((prev) => [...prev, location]);
       }
     });
   }, [locations]);
 
   const handleClickMesh = (position) => {
-    console.log("position", position); //test
+    setClueIndex(position);
+    navigate("/insideFluto");
   };
   return (
     <>
@@ -112,7 +122,11 @@ function FindJohn() {
         </ul>
         {clues.length === 0 && <p>단서 없음</p>}
       </ClueWrapper>
-      <DescriptionModal modalOpen={modalOpen} closeModal={closeModal} />
+      <DescriptionModal
+        modalOpen={modalOpen}
+        closeModal={closeModal}
+        check="확인"
+      />
     </>
   );
 }
