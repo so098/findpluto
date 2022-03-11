@@ -84,7 +84,11 @@ function Tutorial() {
           <p>{Text}</p>
         </ScriptBox>
       </Naptune>
-      <DescriptionModal modalOpen={modalOpen} closeModal={closeModal} />
+      <DescriptionModal
+        modalOpen={modalOpen}
+        closeModal={closeModal}
+        check="확인"
+      />
     </>
   );
 }
