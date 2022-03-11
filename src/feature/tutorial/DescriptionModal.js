@@ -2,12 +2,13 @@ import React from "react";
 
 import Modal from "../../common/components/Modal";
 
-function DescriptionModal({ modalOpen, closeModal }) {
+function DescriptionModal({ modalOpen, closeModal, check }) {
   return (
     <Modal
       open={modalOpen}
       close={closeModal}
       header="존을 설득해 단서를 얻으세요."
+      check={check}
     >
       존은 명왕성을 태양계 행성으로 되돌리기 위해
       <br /> 나사 기밀문서를 빼돌려 명왕성으로 갔습니다.
