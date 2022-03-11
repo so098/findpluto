@@ -15,10 +15,10 @@ function SpaceBackground() {
       <Stars
         ref={backgroundAnimation}
         radius={100}
-        count={5000}
+        count={10000}
         factor={4}
         saturation={0}
-        depth={100}
+        depth={400}
         fade
       />
     </group>
