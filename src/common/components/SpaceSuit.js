@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { useGLTF } from "@react-three/drei";
 
-import johnLocations from "../../feature/insideFluto/resource/johnLocations.json";
+import johnLocations from "../../feature/insidePluto/resource/johnLocations.json";
 import clueStore from "../../module/clueStore";
 
 export default function SpaceSuit({ ...props }) {
@@ -21,6 +21,7 @@ export default function SpaceSuit({ ...props }) {
   const [intersection, setIntersection] = useState([]);
   const [position, setPosition] = useState([]);
   const setJohnPosition = clueStore((state) => state.setJohnPosition);
+
   useEffect(() => {
     johnLocations.forEach((johnLocation) => {
       if (symbols.includes(johnLocation.name) && johnLocation.positions) {
@@ -78,7 +79,7 @@ export default function SpaceSuit({ ...props }) {
       setJohnPosition(positions[positionPick]);
     }
   }, [intersection]);
-  console.log("position", position);
+
   return (
     <group ref={group} {...props} dispose={null} position={position}>
       <group rotation={[-Math.PI / 2.1, 1.3, 2]}>
