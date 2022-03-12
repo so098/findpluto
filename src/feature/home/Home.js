@@ -5,7 +5,7 @@ import { useBeforeunload } from "react-beforeunload";
 
 import Planet from "../../common/components/Planet";
 import SpaceBackground from "../../common/components/SpaceBackground";
-import SpaceStar from "../../common/components/SpaceStar";
+import SpaceStar from "./SpaceStar";
 import Title from "./Title";
 
 function Home() {
