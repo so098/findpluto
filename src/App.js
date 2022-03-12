@@ -7,10 +7,11 @@ import FindJohn from "./feature/findJohn/FindJohn";
 import Home from "./feature/home/Home";
 import InsidePluto from "./feature/insidePluto/InsidePluto";
 import Tutorial from "./feature/tutorial/Tutorial";
+
 function App() {
   const navigate = useNavigate();
-  useBeforeunload((event) => {
-    event.preventDefault();
+  useBeforeunload((e) => {
+    e.preventDefault();
   });
 
   useEffect(() => {
