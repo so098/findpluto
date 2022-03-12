@@ -133,8 +133,8 @@ function FindJohn() {
 
 const CanvasWrapper = styled.div`
   position: absolute;
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
