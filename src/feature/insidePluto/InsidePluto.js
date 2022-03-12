@@ -88,9 +88,20 @@ function InsidePluto() {
           </Physics>
         </Suspense>
       </Canvas>
-      <CountWrapper>
-        {count}초 남았습니다. speed: {speed}
-      </CountWrapper>
+      <GaugeContainer>
+        <CountWrapper>
+          <h2 className="count">
+            {count < 10 ? "0" + count : count}
+            <span>sec</span>
+          </h2>
+        </CountWrapper>
+        <CountWrapper>
+          <h2 className="speed">
+            <span>speed</span>
+            {speed}
+          </h2>
+        </CountWrapper>
+      </GaugeContainer>
       {isStartModal && (
         <Modal
           open={isStartModal}
@@ -102,7 +113,7 @@ function InsidePluto() {
           <br /> 존을 찾으면 가까이 가서 마우스로 클릭해주세요.
           <br /> 박스를 클릭하면 스피드가 증가합니다(가운데를 맞춰서 클릭)
           <br />
-          키보드 움직임[앞
+          키보드 움직임[
           <IoMdArrowDropup />
           (앞) ,<IoMdArrowDropdown />
           (뒤),
@@ -142,12 +153,37 @@ function InsidePluto() {
   );
 }
 
-const CountWrapper = styled.div`
+const GaugeContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   height: 100%;
   color: #fff;
 `;
+
+const CountWrapper = styled.div`
+  span {
+    font-size: 18px;
+    color: #fff;
+  }
+
+  h2 {
+    font-size: 100px;
+    font-family: ${(props) => props.theme.font.titleFont};
+    font-style: italic;
+  }
+
+  .count {
+    color: ${(props) => props.theme.color.titleColor};
+  }
+
+  .speed {
+    color: ${(props) => props.theme.color.titlePurpleColor};
+  }
+`;
+
 export default InsidePluto;
