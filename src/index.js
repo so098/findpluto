@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import "./common/styles/font.css";
 
-import "./index.css";
 import App from "./App";
 import GlobalStyle from "./common/styles/GlobalStyle";
 import theme from "./common/styles/theme";
