@@ -75,7 +75,7 @@ function FindJohn() {
 
   const handleClickMesh = (position) => {
     setClueIndex(position);
-    navigate("/insideFluto");
+    navigate("/insidePluto");
   };
   return (
     <>
