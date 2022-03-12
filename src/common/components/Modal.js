@@ -51,6 +51,7 @@ const ModalWrapper = styled.div`
       `;
   }};
   z-index: 99;
+
   .modal {
     display: none;
     position: fixed;
@@ -71,6 +72,7 @@ const ModalWrapper = styled.div`
     display: flex;
     align-items: center;
   }
+
   section {
     position: absolute;
     top: 50%;
@@ -80,6 +82,7 @@ const ModalWrapper = styled.div`
     border-radius: 0.3rem;
     overflow: hidden;
     z-index: 100;
+
     header {
       margin-bottom: 10px;
       text-shadow: 1px 1px 1px #000;
