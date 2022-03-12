@@ -49,7 +49,7 @@ function InsidePluto() {
     setIsStartModal(false);
   };
 
-  const closeSuceessModal = () => {
+  const closeSuccessModal = () => {
     navigator("/");
   };
 
@@ -99,17 +99,17 @@ function InsidePluto() {
           header="제한시간 안에 존을 찾아 클릭하세요"
         >
           제한시간 10초 안에 존을 찾으면 성공, 아니면 실패입니다
-          <br /> 존을 찾으면 가까이 가서 클릭해주세요.
+          <br /> 존을 찾으면 가까이 가서 마우스로 클릭해주세요.
           <br /> 박스를 클릭하면 스피드가 증가합니다(가운데를 맞춰서 클릭)
           <br />
-          움직임은 키보드[앞
+          키보드 움직임[앞
           <IoMdArrowDropup />
           (앞) ,<IoMdArrowDropdown />
           (뒤),
           <IoMdArrowDropright />
           (오른쪽),
           <IoMdArrowDropleft />
-          (왼쪽), w(위), s(아래)]입니다.
+          (왼쪽), w(위), s(아래)]
           <br />
           마우스로 배경을 클릭하면 주변시야를 확보할 수 있습니다.
         </Modal>
@@ -117,7 +117,7 @@ function InsidePluto() {
       {isSuccessModal && (
         <Modal
           open={isSuccessModal}
-          close={closeSuceessModal}
+          close={closeSuccessModal}
           check="처음으로 돌아가기"
           header="마우스가 보이지 않는다면 esc를 눌러주세요"
           styleNone
@@ -149,6 +149,5 @@ const CountWrapper = styled.div`
   width: 100%;
   height: 100%;
   color: #fff;
-  /* background: url("/assets/locationBackground.svg") no-repeat center/cover; */
 `;
 export default InsidePluto;
