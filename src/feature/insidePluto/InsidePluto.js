@@ -3,12 +3,19 @@ import React, { Suspense, useEffect, useState } from "react";
 import { Physics } from "@react-three/cannon";
 import { PointerLockControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import {
+  IoMdArrowDropup,
+  IoMdArrowDropdown,
+  IoMdArrowDropright,
+  IoMdArrowDropleft,
+} from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Modal from "../../common/components/Modal";
 import SpaceBackground from "../../common/components/SpaceBackground";
 import clueStore from "../../module/clueStore";
+import speedStore from "../../module/speedStore";
 import Player from "./Player";
 import clueLocations from "./resource/clueLocations.json";
 
@@ -20,7 +27,7 @@ function InsidePluto() {
   const [isFailModal, setIsFailModal] = useState(false);
   const [isStartModal, setIsStartModal] = useState(true);
   const [count, setCount] = useState(10);
-  const [speedNumber, setSpeedNumber] = useState(0);
+  const speed = speedStore((state) => state.speed);
   useEffect(() => {
     if (!isStartModal && !isSuccessModal) {
       const interval = setInterval(() => {
@@ -77,16 +84,12 @@ function InsidePluto() {
                 <PointerLockControls />
               </>
             )}
-            <Player
-              position={position}
-              setIsSuccessModal={setIsSuccessModal}
-              setSpeedNumber={setSpeedNumber}
-            />
+            <Player position={position} setIsSuccessModal={setIsSuccessModal} />
           </Physics>
         </Suspense>
       </Canvas>
       <CountWrapper>
-        {count}남았습니다. speed: {speedNumber}
+        {count}초 남았습니다. speed: {speed}
       </CountWrapper>
       {isStartModal && (
         <Modal
@@ -95,8 +98,20 @@ function InsidePluto() {
           check="확인"
           header="제한시간 안에 존을 찾아 클릭하세요"
         >
-          제한시간 20초 안에 존을 찾으면 성공, 아니면 실패입니다
-          <br /> 존을 찾으면 가까이 가서 클릭해주세요
+          제한시간 10초 안에 존을 찾으면 성공, 아니면 실패입니다
+          <br /> 존을 찾으면 가까이 가서 클릭해주세요.
+          <br /> 박스를 클릭하면 스피드가 증가합니다(가운데를 맞춰서 클릭)
+          <br />
+          움직임은 키보드[앞
+          <IoMdArrowDropup />
+          (앞) ,<IoMdArrowDropdown />
+          (뒤),
+          <IoMdArrowDropright />
+          (오른쪽),
+          <IoMdArrowDropleft />
+          (왼쪽), w(위), s(아래)]입니다.
+          <br />
+          마우스로 배경을 클릭하면 주변시야를 확보할 수 있습니다.
         </Modal>
       )}
       {isSuccessModal && (
@@ -131,6 +146,9 @@ const CountWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   color: #fff;
+  /* background: url("/assets/locationBackground.svg") no-repeat center/cover; */
 `;
 export default InsidePluto;
