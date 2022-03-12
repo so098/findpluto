@@ -1,0 +1,8 @@
+Model Information:
+* title:	Mars Landscape 4
+* source:	https://sketchfab.com/3d-models/mars-landscape-4-4234bf7bcbb243a3a086f0cbcb525acc
+* author:	Rispat Momit (https://sketchfab.com/rispatmomit)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
