@@ -32,7 +32,7 @@ const InsidePluto = () => {
     if (!isStartModal && !isSuccessModal) {
       const interval = setInterval(() => {
         setCount(count - 1);
-      }, 10000);
+      }, 1000);
 
       if (count === 0) {
         clearInterval(interval);
