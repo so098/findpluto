@@ -73,7 +73,6 @@ const SpaceSuit = ({ ...props }) => {
     }
   }, [intersection]);
 
-  console.log("position", position);
   return (
     <group ref={group} {...props} dispose={null} position={position}>
       <group rotation={[-Math.PI / 2.1, 1.3, 2]}>
