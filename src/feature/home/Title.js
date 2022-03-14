@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import userNameStore from "../../module/userNameStore";
 
-function Title() {
+const Title = () => {
   const nameInput = useRef();
   const navigate = useNavigate();
   const setUserName = userNameStore((state) => state.setUserName);
@@ -20,7 +20,7 @@ function Title() {
   };
 
   return (
-    <Section>
+    <Section data-testid="input">
       <TitleBox>
         <span>Find Pluto</span>
         <h1>명왕성을 찾아라</h1>
@@ -29,18 +29,13 @@ function Title() {
         <h2>Your name is...</h2>
         <div>
           <label>우주 비행사</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="에리스"
-            ref={nameInput}
-          ></input>
-          <input type="submit" value="비행준비완료"></input>
+          <input type="text" name="name" placeholder="에리스" ref={nameInput} />
+          <input type="submit" value="비행준비완료" />
         </div>
       </Form>
     </Section>
   );
-}
+};
 
 const Section = styled.section`
   position: absolute;
@@ -112,4 +107,5 @@ const Form = styled.form`
     margin-top: 20px;
   }
 `;
+
 export default Title;
