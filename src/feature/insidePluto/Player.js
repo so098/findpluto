@@ -1,38 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { useSphere } from "@react-three/cannon";
-import { Box } from "@react-three/drei";
 import { useThree, useFrame } from "@react-three/fiber";
+import PropTypes from "prop-types";
 import { Vector3 } from "three";
 
 import { useKeyboardControls } from "../../common/hooks/useKeyboardControls";
 import speedStore from "../../module/speedStore";
+import BonusBox from "./BonusBox";
 import Flag from "./Flag";
 import PlutoPlace from "./PlutoPlace";
 import SpaceSuit from "./SpaceSuit";
 
-function BoxWrapper({ position }) {
-  const speed = speedStore((state) => state.speed);
-  const setSpeed = speedStore((state) => state.setSpeed);
-  const [visible, setVisible] = useState(true);
-
-  return (
-    <mesh
-      onClick={() => {
-        setVisible(false);
-        setSpeed(speed + 30);
-      }}
-      position={position}
-      visible={visible}
-    >
-      <Box args={[5, 5, 5]}>
-        <meshNormalMaterial />
-      </Box>
-    </mesh>
-  );
-}
-
-function Player({ position, setIsSuccessModal }) {
+const Player = ({ position, setIsSuccessModal }) => {
   const speed = speedStore((state) => state.speed);
   const { camera } = useThree();
   const { moveForward, moveBackward, moveLeft, moveRight, moveUp, moveDown } =
@@ -70,6 +50,7 @@ function Player({ position, setIsSuccessModal }) {
     );
 
     const upVector = new Vector3(0, (moveDown ? 1 : 0) - (moveUp ? 1 : 0), 0);
+
     direction
       .subVectors(frontVector, sideVector)
       .add(upVector)
@@ -85,23 +66,28 @@ function Player({ position, setIsSuccessModal }) {
       <mesh ref={chassisBody}>
         <Flag />
         <SpaceSuit onClick={handleOnClickSuit} />
-        <BoxWrapper position={[0, 10, 10]} />
-        <BoxWrapper position={[-400, 60, 200]} />
-        <BoxWrapper position={[200, -10, 40]} />
-        <BoxWrapper position={[600, 0, 70]} />
-        <BoxWrapper position={[700, 0, 10]} />
-        <BoxWrapper position={[800, -20, 0]} />
-        <BoxWrapper position={[-50, -20, 300]} />
-        <BoxWrapper position={[-70, -20, 700]} />
-        <BoxWrapper position={[-100, -20, 100]} />
-        <BoxWrapper position={[-800, 100, 900]} />
-        <BoxWrapper position={[-800, 200, 0]} />
-        <BoxWrapper position={[-800, 200, -200]} />
-        <BoxWrapper position={[-600, 200, -600]} />
+        <BonusBox position={[0, 10, 10]} />
+        <BonusBox position={[-400, 60, 200]} />
+        <BonusBox position={[200, -10, 40]} />
+        <BonusBox position={[600, 0, 70]} />
+        <BonusBox position={[700, 0, 10]} />
+        <BonusBox position={[800, -20, 0]} />
+        <BonusBox position={[-50, -20, 300]} />
+        <BonusBox position={[-70, -20, 700]} />
+        <BonusBox position={[-100, -20, 100]} />
+        <BonusBox position={[-800, 100, 900]} />
+        <BonusBox position={[-800, 200, 0]} />
+        <BonusBox position={[-800, 200, -200]} />
+        <BonusBox position={[-600, 200, -600]} />
         <PlutoPlace position={position} />
       </mesh>
     </>
   );
-}
+};
+
+Player.propTypes = {
+  position: PropTypes.array,
+  setIsSuccessModal: PropTypes.func,
+};
 
 export default Player;
