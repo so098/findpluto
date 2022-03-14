@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import { Stars } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-function SpaceBackground() {
+const SpaceBackground = () => {
   const backgroundAnimation = useRef();
   useFrame(() => {
     backgroundAnimation.current.rotation.x += 0.0025;
@@ -23,6 +23,6 @@ function SpaceBackground() {
       />
     </group>
   );
-}
+};
 
 export default SpaceBackground;
