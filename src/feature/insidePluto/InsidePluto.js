@@ -26,7 +26,7 @@ const InsidePluto = () => {
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
   const [isStartModal, setIsStartModal] = useState(true);
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(15);
   const speed = speedStore((state) => state.speed);
   useEffect(() => {
     if (!isStartModal && !isSuccessModal) {
@@ -68,7 +68,7 @@ const InsidePluto = () => {
   return (
     <>
       <Canvas pixelRatio={window.devicePixelRatio}>
-        <Suspense fallback={null}>
+        <Suspense fallback={<h1>Loading...</h1>}>
           <ambientLight intensity={0.5} />
           <fog attach="fog" color="#eae1d5" near={0} far={300} />
           <SpaceBackground castShadow />
