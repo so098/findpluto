@@ -19,7 +19,7 @@ import speedStore from "../../module/speedStore";
 import Player from "./Player";
 import clueLocations from "./resource/clueLocations.json";
 
-function InsidePluto() {
+const InsidePluto = () => {
   const navigator = useNavigate();
   const clueIndex = clueStore((state) => state.clueIndex);
   const [position, setPosition] = useState([]);
@@ -151,7 +151,7 @@ function InsidePluto() {
       )}
     </>
   );
-}
+};
 
 const GaugeContainer = styled.div`
   position: absolute;

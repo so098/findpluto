@@ -1,6 +1,6 @@
 import userNameStore from "../../../module/userNameStore";
 
-function speakJohnConversation() {
+const speakJohnConversation = () => {
   const userName = userNameStore((state) => state.name);
 
   return [
@@ -67,6 +67,6 @@ function speakJohnConversation() {
         "...너의 말을 들어보니 맞는 것 같네 사람들의 선동도 신경써야 하는데 너무 사실에 근거할 자료를 찾겠다고 섣불리 왔던 것 같아 같이 돌아가자 난 지금 바다가 있는 면에 있고 빛의 반대편에 있어 깃발을 꽂아둘게 거기로 와줘 부탁할게.",
     },
   ];
-}
+};
 
 export default speakJohnConversation;

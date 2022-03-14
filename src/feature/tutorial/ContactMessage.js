@@ -1,37 +1,38 @@
 import React, { useState } from "react";
 
+import PropTypes from "prop-types";
 import { IoMdArrowDropdown } from "react-icons/io";
 import styled from "styled-components";
 
 import createKey from "../../common/utils/createKey";
 import clueStore from "../../module/clueStore";
 import LodingPage from "./LodingPage";
-import chooseConversation from "./resource/chooseConversation";
+import chooseConversation from "./resource/chooseConversation.json";
 import speakJohnConversation from "./resource/speakJohnConversation";
 import tutorialMessages from "./resource/tutorialMessages";
 
-function ContactMessage({ setSpeaker }) {
+const ContactMessage = ({ setListener }) => {
   const [count, setCount] = useState(0);
   const [speakStart, setSpeakStart] = useState(0);
   const [isJohnSays, setIsJohnSays] = useState(false);
   const [isChoiceStart, setIsChoiceStart] = useState(false);
   const [isLoding, setIsLoding] = useState(false);
+
   const tutorialScript = tutorialMessages();
-  const choiceConversation = chooseConversation();
   const johnSayConversation = speakJohnConversation();
   const setClue = clueStore((state) => state.setClue);
   const setSymbols = clueStore((state) => state.setSymbols);
 
-  const handleOnClick = (speaker) => {
+  const handleOnClick = (listener) => {
     if (count === tutorialScript.length - 1) {
       setIsChoiceStart(true);
       return;
     }
     setCount(count + 1);
-    setSpeaker(speaker);
+    setListener(listener);
   };
 
-  const handleChoiceMessage = (e, clue, speaker, symbols) => {
+  const handleChoiceMessage = (e, clue, listener, symbols) => {
     if (!e.target.id) {
       setClue(clue);
       setSymbols(symbols);
@@ -41,7 +42,7 @@ function ContactMessage({ setSpeaker }) {
 
     setIsJohnSays((isJohnSays) => !isJohnSays);
     setSpeakStart(Number(e.target.id));
-    setSpeaker(speaker);
+    setListener(listener);
   };
 
   return (
@@ -50,10 +51,10 @@ function ContactMessage({ setSpeaker }) {
       <ChoiceMessages>
         {isChoiceStart &&
           !isJohnSays &&
-          choiceConversation[speakStart].answers.map((answer) => {
+          chooseConversation[speakStart].answers.map((answer) => {
             return (
               <section key={createKey()}>
-                <Notice top="8" speaker="john">
+                <Notice top="8" to="john">
                   {answer.type}
                 </Notice>
                 <div
@@ -98,7 +99,7 @@ function ContactMessage({ setSpeaker }) {
           })}
         {isChoiceStart && isJohnSays && (
           <section>
-            <Notice top="8" speaker="me">
+            <Notice top="8" to="me">
               {johnSayConversation[speakStart].type}
             </Notice>
             <div
@@ -120,14 +121,14 @@ function ContactMessage({ setSpeaker }) {
       </ChoiceMessages>
       {!isChoiceStart && (
         <>
-          <Notice top="9" speaker={tutorialScript[count].speaker}>
+          <Notice top="9" to={tutorialScript[count].to}>
             {tutorialScript[count].type}
           </Notice>
-          <MessageWrapper speaker={tutorialScript[count].speaker}>
+          <MessageWrapper speaker={tutorialScript[count].to}>
             <p>{tutorialScript[count].text}</p>
             <ArrowWrapper
               onClick={() => {
-                handleOnClick(tutorialScript[count].speaker);
+                handleOnClick(tutorialScript[count].to);
               }}
             >
               <IoMdArrowDropdown />
@@ -137,7 +138,7 @@ function ContactMessage({ setSpeaker }) {
       )}
     </>
   );
-}
+};
 
 const Notice = styled.span`
   position: absolute;
@@ -151,8 +152,8 @@ const Notice = styled.span`
   font-weight: 500;
   background: #080808;
 
-  ${({ speaker }) => {
-    return speaker === "john"
+  ${({ to }) => {
+    return to === "john"
       ? `
       color: #0fd1c9;
       `
@@ -247,4 +248,8 @@ const ClueNumberWrapper = styled.h2`
   padding-bottom: 10px;
   border-bottom: 1px solid ${(props) => props.theme.color.titleColor};
 `;
+
+ContactMessage.propTypes = {
+  setListener: PropTypes.func,
+};
 export default ContactMessage;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function LodingPage() {
+const LodingPage = () => {
   const navigate = useNavigate();
   const [timer, setTimer] = useState(5);
   useEffect(() => {
@@ -32,7 +32,7 @@ function LodingPage() {
       </div>
     </Loding>
   );
-}
+};
 
 const Loding = styled.section`
   position: absolute;

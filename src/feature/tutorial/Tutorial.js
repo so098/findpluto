@@ -3,21 +3,21 @@ import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
 
-import Naptune from "../../common/components/Naptune";
 import SpaceBackground from "../../common/components/SpaceBackground";
 import SpaceCraft from "../../common/components/SpaceCraft";
 import ContactMessage from "./ContactMessage";
 import DescriptionModal from "./DescriptionModal";
+import Naptune from "./Naptune";
 
-function Tutorial() {
+const Tutorial = () => {
   const txt =
-    "2090년.. 해왕성에서 혼자 탐사를 하는 도중에 나사에서 연락이 와... 기밀문서를 가지고 명왕성으로 떠난 존을 찾아 지구로 돌아오라는 명령을 받게 되었다....   내가 과연 명왕성을 행성계로 돌려놓겠다고 명왕성으로 떠난 존을 설득할 수 있을까..?";
+    "2090년.. 해왕성에서 혼자 탐사를 하는 도중에 나사에서 연락이 와... 기밀문서를 가지고 명왕성으로 떠난 존을 찾아 지구로 돌아오라는 명령을 받게 되었다....  내가 과연 명왕성을 행성계로 돌려놓겠다고 명왕성으로 떠난 존을 설득할 수 있을까..?";
   const [Text, setText] = useState("");
   const [Count, setCount] = useState(0);
   const [textStart, setTextStart] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [contactMessageStart, setContactMessageStart] = useState(false);
-  const [speaker, setSpeaker] = useState("me");
+  const [listener, setListener] = useState("me");
   const [contactJohn, setContactJohn] = useState("");
 
   useEffect(() => {
@@ -77,12 +77,10 @@ function Tutorial() {
         <SpaceBackground />
       </Canvas>
       {!textStart && !modalOpen && <Notice>{contactJohn}</Notice>}
-      {contactMessageStart && <ContactMessage setSpeaker={setSpeaker} />}
+      {contactMessageStart && <ContactMessage setListener={setListener} />}
       <Naptune>
-        <SpaceCraft speaker={speaker} />
-        <ScriptBox onClick={openModal}>
-          <p>{Text}</p>
-        </ScriptBox>
+        <SpaceCraft speaker={listener} />
+        <ScriptBox onClick={openModal}>{Text}</ScriptBox>
       </Naptune>
       <DescriptionModal
         modalOpen={modalOpen}
@@ -91,7 +89,7 @@ function Tutorial() {
       />
     </>
   );
-}
+};
 
 const Notice = styled.span`
   position: absolute;
@@ -113,7 +111,6 @@ const ScriptBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 20px 60px;
   font-size: 20px;
   text-align: center;
   text-shadow: 1px 1px 5px #000;
