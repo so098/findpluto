@@ -10,9 +10,9 @@ import SpaceCraft from "../../common/components/SpaceCraft";
 import createKey from "../../common/utils/createKey";
 import clueStore from "../../module/clueStore";
 import DescriptionModal from "../findJohn/DescriptionModal";
-import cluePositons from "./resource/cluePosition.json";
+import cluePositions from "./resource/cluePosition.json";
 
-function FindJohn() {
+const FindJohn = () => {
   const [modalOpen, setModalOpen] = useState(true);
   const [locationNames, setLocationNames] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -26,7 +26,7 @@ function FindJohn() {
   };
 
   useEffect(() => {
-    cluePositons.forEach((location) => {
+    cluePositions.forEach((location) => {
       if (symbols.includes(location.name) && location.positions) {
         location.positions.forEach((positions) => {
           setLocationNames((prev) => [...prev, location.name]);
@@ -77,6 +77,7 @@ function FindJohn() {
     setClueIndex(position);
     navigate("/insidePluto");
   };
+
   return (
     <>
       <CanvasWrapper>
@@ -108,7 +109,7 @@ function FindJohn() {
                 </mesh>
               );
             })}
-            <Planet image="/assets/pluto.jpg" refNone="refNone" />
+            <Planet image="/assets/pluto.jpg" animationNone="animationNone" />
           </Suspense>
         </Canvas>
       </CanvasWrapper>
@@ -129,7 +130,7 @@ function FindJohn() {
       />
     </>
   );
-}
+};
 
 const CanvasWrapper = styled.div`
   position: absolute;
@@ -164,4 +165,5 @@ const ClueWrapper = styled.div`
     font-size: 18px;
   }
 `;
+
 export default FindJohn;
