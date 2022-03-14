@@ -25,7 +25,7 @@ const Tutorial = () => {
       const interval = setInterval(() => {
         setText(Text + txt[Count]);
         setCount(Count + 1);
-      }, 50);
+      }, 1000);
 
       if (Count === txt.length) {
         clearInterval(interval);
