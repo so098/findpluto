@@ -1,10 +1,11 @@
 import React from "react";
 
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-function SpaceCraft({ children, speaker }) {
+const SpaceCraft = ({ children, speaker }) => {
   return <Craft speaker={speaker}>{children}</Craft>;
-}
+};
 
 const Craft = styled.div`
   position: absolute;
@@ -20,4 +21,10 @@ const Craft = styled.div`
   }};
   transition: all 0.2s;
 `;
+
+SpaceCraft.propTypes = {
+  children: PropTypes.node,
+  speaker: PropTypes.string,
+};
+
 export default SpaceCraft;
