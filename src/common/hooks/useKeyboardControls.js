@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function actionByKey(key) {
+const actionByKey = (key) => {
   const keys = {
     ArrowUp: "moveForward",
     ArrowDown: "moveBackward",
@@ -10,7 +10,8 @@ function actionByKey(key) {
     KeyS: "moveDown",
   };
   return keys[key];
-}
+};
+
 export const useKeyboardControls = () => {
   const [movement, setMovement] = useState({
     moveForward: false,
