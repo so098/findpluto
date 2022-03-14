@@ -20,14 +20,17 @@ import Player from "./Player";
 import clueLocations from "./resource/clueLocations.json";
 
 const InsidePluto = () => {
+  const INITCOUNT = 25;
   const navigator = useNavigate();
   const clueIndex = clueStore((state) => state.clueIndex);
   const [position, setPosition] = useState([]);
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
   const [isStartModal, setIsStartModal] = useState(true);
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(INITCOUNT);
   const speed = speedStore((state) => state.speed);
+  const setSpeed = speedStore((state) => state.setSpeed);
+
   useEffect(() => {
     if (!isStartModal && !isSuccessModal) {
       const interval = setInterval(() => {
@@ -51,10 +54,12 @@ const InsidePluto = () => {
 
   const closeSuccessModal = () => {
     navigator("/");
+    setSpeed(30);
   };
 
   const closeFailModal = () => {
     navigator("/");
+    setSpeed(30);
   };
 
   useEffect(() => {
@@ -68,7 +73,7 @@ const InsidePluto = () => {
   return (
     <>
       <Canvas pixelRatio={window.devicePixelRatio}>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
           <fog attach="fog" color="#eae1d5" near={0} far={300} />
           <SpaceBackground castShadow />
@@ -109,20 +114,21 @@ const InsidePluto = () => {
           check="확인"
           header="제한시간 안에 존을 찾아 클릭하세요"
         >
-          제한시간 10초 안에 존을 찾으면 성공, 아니면 실패입니다
-          <br /> 존을 찾으면 가까이 가서 마우스로 클릭해주세요.
-          <br /> 박스를 클릭하면 스피드가 증가합니다(가운데를 맞춰서 클릭)
-          <br />
-          키보드 움직임[
-          <IoMdArrowDropup />
-          (앞) ,<IoMdArrowDropdown />
-          (뒤),
-          <IoMdArrowDropright />
-          (오른쪽),
-          <IoMdArrowDropleft />
-          (왼쪽), w(위), s(아래)]
-          <br />
-          마우스로 배경을 클릭하면 주변시야를 확보할 수 있습니다.
+          <p>제한시간 10초 안에 존을 찾으면 성공, 아니면 실패입니다 </p>
+          <p>존을 찾으면 가까이 가서 마우스로 클릭해주세요. </p>
+          <p>박스를 클릭하면 스피드가 증가합니다</p>
+          <p>(클릭 시 가운데를 맞춰서 클릭!)</p>
+          <p> 마우스로 배경을 클릭하면 주변시야를 확보할 수 있습니다.</p>
+          <p>
+            키보드 움직임[
+            <IoMdArrowDropup />
+            (앞) ,<IoMdArrowDropdown />
+            (뒤),
+            <IoMdArrowDropright />
+            (오른쪽),
+            <IoMdArrowDropleft />
+            (왼쪽), w(위), s(아래)]
+          </p>
         </Modal>
       )}
       {isSuccessModal && (
@@ -133,7 +139,7 @@ const InsidePluto = () => {
           header="마우스가 보이지 않는다면 esc를 눌러주세요"
           styleNone
         >
-          <p>존을 찾는데 걸린 시간 : {count}초</p>
+          <p>존을 찾는데 걸린 시간 : {INITCOUNT - count}초</p>
           <img src="/assets/successDescription.png" />
         </Modal>
       )}
