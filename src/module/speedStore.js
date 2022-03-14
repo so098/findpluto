@@ -1,7 +1,7 @@
 import create from "zustand";
 
 const speedStore = create((set) => ({
-  speed: 50,
+  speed: 30,
   setSpeed: (speedNumber) => set(() => ({ speed: speedNumber })),
 }));
 
