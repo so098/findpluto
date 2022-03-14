@@ -1,8 +1,10 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import Modal from "../../common/components/Modal";
 
-function DescriptionModal({ modalOpen, closeModal, check }) {
+const DescriptionModal = ({ modalOpen, closeModal, check }) => {
   return (
     <Modal
       open={modalOpen}
@@ -15,6 +17,12 @@ function DescriptionModal({ modalOpen, closeModal, check }) {
       <br /> 존이 있을 좌표를 클릭하여 명왕성 내부로 들어가세요
     </Modal>
   );
-}
+};
+
+DescriptionModal.propTypes = {
+  modalOpen: PropTypes.bool,
+  closeModal: PropTypes.func,
+  check: PropTypes.string,
+};
 
 export default DescriptionModal;
