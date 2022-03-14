@@ -26,7 +26,7 @@ const InsidePluto = () => {
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
   const [isStartModal, setIsStartModal] = useState(true);
-  const [count, setCount] = useState(15);
+  const [count, setCount] = useState(20);
   const speed = speedStore((state) => state.speed);
   useEffect(() => {
     if (!isStartModal && !isSuccessModal) {
