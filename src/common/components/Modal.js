@@ -126,8 +126,8 @@ Modal.propTypes = {
   close: PropTypes.func,
   header: PropTypes.string,
   check: PropTypes.string,
-  styleNone: PropTypes.string,
-  styled: PropTypes.string,
+  styleNone: PropTypes.bool,
+  styled: PropTypes.func,
   children: PropTypes.node,
 };
 
