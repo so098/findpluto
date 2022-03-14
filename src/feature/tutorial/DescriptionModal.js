@@ -1,8 +1,10 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import Modal from "../../common/components/Modal";
 
-function DescriptionModal({ modalOpen, closeModal, check }) {
+const DescriptionModal = ({ modalOpen, closeModal, check }) => {
   return (
     <Modal
       open={modalOpen}
@@ -17,6 +19,12 @@ function DescriptionModal({ modalOpen, closeModal, check }) {
       <br /> 얻을 수 있는 최대 단서 갯수 : 3개
     </Modal>
   );
-}
+};
+
+DescriptionModal.propTypes = {
+  modalOpen: PropTypes.bool,
+  closeModal: PropTypes.func,
+  check: PropTypes.string,
+};
 
 export default DescriptionModal;
