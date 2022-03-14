@@ -1,32 +1,32 @@
 import React from "react";
 
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-function Modal(props) {
-  const { open, close, header, check, styleNone, styled } = props;
-
+const Modal = ({ open, close, header, check, styleNone, styled, children }) => {
   return (
     <ModalWrapper
       className={open ? "openModal modal" : "modal"}
       styled={styled}
+      data-testid="modal"
     >
       {open ? (
-        <>
+        <div>
           <Background />
           <section>
             <header>{header}</header>
-            <Main styleNone={styleNone}>{props.children}</Main>
+            <Main styleNone={styleNone}>{children}</Main>
             <footer>
               <Button onClick={close} styled={styled}>
                 {check}
               </Button>
             </footer>
           </section>
-        </>
+        </div>
       ) : null}
     </ModalWrapper>
   );
-}
+};
 
 const Background = styled.div`
   position: absolute;
@@ -120,4 +120,15 @@ const Main = styled.main`
       `;
   }};
 `;
+
+Modal.propTypes = {
+  open: PropTypes.bool,
+  close: PropTypes.func,
+  header: PropTypes.string,
+  check: PropTypes.string,
+  styleNone: PropTypes.string,
+  styled: PropTypes.string,
+  children: PropTypes.node,
+};
+
 export default Modal;
