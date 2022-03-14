@@ -11,7 +11,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
-export default function SpaceStar({ ...props }) {
+const SpaceStar = ({ ...props }) => {
   const backgroundAnimation = useRef();
 
   useFrame(() => {
@@ -96,6 +96,8 @@ export default function SpaceStar({ ...props }) {
       </group>
     </group>
   );
-}
+};
+
+export default SpaceStar;
 
 useGLTF.preload("/spaceStar/scene.gltf");
