@@ -8,7 +8,7 @@ import SpaceBackground from "../../common/components/SpaceBackground";
 import SpaceStar from "./SpaceStar";
 import Title from "./Title";
 
-function Home() {
+const Home = () => {
   useBeforeunload((event) => {
     event.preventDefault();
   });
@@ -32,6 +32,6 @@ function Home() {
       <Title />
     </>
   );
-}
+};
 
 export default Home;
