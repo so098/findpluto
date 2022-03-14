@@ -8,7 +8,7 @@ import Home from "./feature/home/Home";
 import InsidePluto from "./feature/insidePluto/InsidePluto";
 import Tutorial from "./feature/tutorial/Tutorial";
 
-function App() {
+const App = () => {
   const navigate = useNavigate();
   useBeforeunload((e) => {
     e.preventDefault();
@@ -28,6 +28,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;
