@@ -1,6 +1,6 @@
 
 ## 👩‍🚀 명왕성을 찾아라
-___
+
 <img width="1764" alt="mainpage" src="https://user-images.githubusercontent.com/58973928/158353566-d2f838a0-65f6-4c78-988b-48128a1f28ad.png">
 
 ## Links
