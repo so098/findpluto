@@ -9,7 +9,7 @@ const LodingPage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer(timer - 1);
-    }, 10);
+    }, 1000);
 
     if (timer === 0) {
       clearInterval(interval);
