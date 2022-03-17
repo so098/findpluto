@@ -23,7 +23,7 @@ const ContactMessage = ({ setListener }) => {
   const setClue = clueStore((state) => state.setClue);
   const setSymbols = clueStore((state) => state.setSymbols);
 
-  const handleOnClick = (listener) => {
+  const handleOnClickNext = (listener) => {
     if (count === tutorialScript.length - 1) {
       setIsChoiceStart(true);
       return;
@@ -128,7 +128,7 @@ const ContactMessage = ({ setListener }) => {
             <p>{tutorialScript[count].text}</p>
             <ArrowWrapper
               onClick={() => {
-                handleOnClick(tutorialScript[count].to);
+                handleOnClickNext(tutorialScript[count].to);
               }}
             >
               <IoMdArrowDropdown />
