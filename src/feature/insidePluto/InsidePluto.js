@@ -15,29 +15,30 @@ import styled from "styled-components";
 import Modal from "../../common/components/Modal";
 import SpaceBackground from "../../common/components/SpaceBackground";
 import clueStore from "../../module/clueStore";
-import speedStore from "../../module/speedStore";
+import itemStore from "../../module/itemStore";
 import Player from "./Player";
 import clueLocations from "./resource/clueLocations.json";
 
 const InsidePluto = () => {
-  const INITCOUNT = 25;
+  const INITTIME = 25;
   const navigator = useNavigate();
   const clueIndex = clueStore((state) => state.clueIndex);
   const [position, setPosition] = useState([]);
   const [isSuccessModal, setIsSuccessModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
   const [isStartModal, setIsStartModal] = useState(true);
-  const [count, setCount] = useState(INITCOUNT);
-  const speed = speedStore((state) => state.speed);
-  const setSpeed = speedStore((state) => state.setSpeed);
+  const setTime = itemStore((state) => state.setTime);
+  const time = itemStore((state) => state.time);
+  const speed = itemStore((state) => state.speed);
+  const setSpeed = itemStore((state) => state.setSpeed);
 
   useEffect(() => {
     if (!isStartModal && !isSuccessModal) {
       const interval = setInterval(() => {
-        setCount(count - 1);
+        setTime(time - 1);
       }, 1000);
 
-      if (count === 0) {
+      if (time === 0) {
         clearInterval(interval);
         setIsFailModal(true);
         setIsSuccessModal(false);
@@ -55,11 +56,13 @@ const InsidePluto = () => {
   const closeSuccessModal = () => {
     navigator("/");
     setSpeed(30);
+    setTime(INITTIME);
   };
 
   const closeFailModal = () => {
     navigator("/");
     setSpeed(30);
+    setTime(INITTIME);
   };
 
   useEffect(() => {
@@ -96,7 +99,7 @@ const InsidePluto = () => {
       <GaugeContainer>
         <CountWrapper>
           <h2 className="count">
-            {count < 10 ? "0" + count : count}
+            {time < 10 ? "0" + time : time}
             <span>sec</span>
           </h2>
         </CountWrapper>
@@ -117,6 +120,7 @@ const InsidePluto = () => {
           <p>제한시간 10초 안에 존을 찾으면 성공, 아니면 실패입니다 </p>
           <p>존을 찾으면 가까이 가서 마우스로 클릭해주세요. </p>
           <p>박스를 클릭하면 스피드가 증가합니다</p>
+          <p>플러스 박스를 클릭하면 시간이 증가합니다</p>
           <p>(클릭 시 가운데를 맞춰서 클릭!)</p>
           <p> 마우스로 배경을 클릭하면 주변시야를 확보할 수 있습니다.</p>
           <p>
@@ -139,7 +143,7 @@ const InsidePluto = () => {
           header="마우스가 보이지 않는다면 esc를 눌러주세요"
           styleNone
         >
-          <p>존을 찾는데 걸린 시간 : {INITCOUNT - count}초</p>
+          <p>존을 찾는데 걸린 시간 : {INITTIME - time}초</p>
           <img src="/assets/successDescription.png" />
         </Modal>
       )}
