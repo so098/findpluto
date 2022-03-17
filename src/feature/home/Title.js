@@ -20,7 +20,7 @@ const Title = () => {
   };
 
   return (
-    <Section data-testid="input">
+    <Section>
       <TitleBox>
         <span>Find Pluto</span>
         <h1>명왕성을 찾아라</h1>
