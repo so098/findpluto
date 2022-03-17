@@ -6,21 +6,21 @@ import PropTypes from "prop-types";
 import * as THREE from "three";
 
 const Planet = ({ image, animationNone }) => {
-  const planetAnimation = useRef();
+  const planetAnimationRef = useRef();
   const animationNoneRef = useRef();
   const texture = useLoader(THREE.TextureLoader, image);
 
   useFrame(() => {
     if (!animationNone) {
-      planetAnimation.current.rotation.x += 0.0004;
-      planetAnimation.current.rotation.y += 0.0035;
+      planetAnimationRef.current.rotation.x += 0.0004;
+      planetAnimationRef.current.rotation.y += 0.0035;
     }
   });
 
   return (
     <>
       <mesh
-        ref={animationNone ? animationNoneRef : planetAnimation}
+        ref={animationNone ? animationNoneRef : planetAnimationRef}
         enableZoom={false}
       >
         <OrbitControls />
