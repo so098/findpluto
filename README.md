@@ -49,15 +49,23 @@ ___
 
 #### 대화선택게임 페이지입니다. 대화를 선택해서 존과의 대화를 이어갈 수 있습니다. 존의 위치에 대한 단서를 얻으려면 존의 호감을 얻을 수 있는 루트의 대화를 선택해서 이어가야합니다.
 ___
-<img width="1000" alt="find john page" src="https://user-images.githubusercontent.com/58973928/158365195-e8696213-c794-46ec-a5a4-557d0e98df4b.gif">
+<img width="1000" alt="find john page" src="https://user-images.githubusercontent.com/58973928/158780562-12c2adfb-a9b1-4783-bffc-3bb9dd5e7507.gif">
 
 #### 행성에 존의 위치에 대한 단서를 바탕으로 좌표를 꽂아두었습니다. 그중에 존이 있을만한 위치를 클릭하면 그 위치로 이동합니다.
 ___
 
 <img width="1000" alt="inside pluto page" src="https://user-images.githubusercontent.com/58973928/158476790-d10bb046-d5b1-4a45-bdb2-fba57890d3c9.gif">
-<br/><br/><br/>
 
 #### 존을 찾으면서 필요한 아이템을 클릭합니다. 박스 클릭시 스피드가 증가되고 플러스 공 클릭시 시간이 증가됩니다. 
+___
+<img width="1000" alt="inside pluto page" src="https://user-images.githubusercontent.com/58973928/158781134-bef23f58-767f-4abe-9e02-58cd1540d2d7.png">
+
+#### 성공시 뜨는 화면입니다. 
+___
+<img width="1000" alt="inside pluto page" src="https://user-images.githubusercontent.com/58973928/158780819-aa23ae61-387f-4932-b6e3-5105f766f7b3.png">
+
+#### 실패시 뜨는 화면입니다. 
+
 ---
 ## 기술 명세
 |Client|Common|
