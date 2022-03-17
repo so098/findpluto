@@ -3,15 +3,15 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
-export const renderWithWrappers =
-  (wrappers = []) =>
-  (component) =>
-    [...wrappers, render].reduce(
-      (component, wrapper) => wrapper(component),
-      component
-    );
+import GlobalStyle from "./common/styles/GlobalStyle";
+import theme from "./common/styles/theme";
 
-export const withRouter = (component) => <Router>{component}</Router>;
-export const renderWithRouter = (component) =>
-  renderWithWrappers([withRouter])(component);
+export const customRender = (children) =>
+  render(
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router>{children}</Router>
+    </ThemeProvider>
+  );
