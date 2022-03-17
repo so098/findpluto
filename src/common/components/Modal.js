@@ -8,7 +8,6 @@ const Modal = ({ open, close, header, check, styleNone, styled, children }) => {
     <ModalWrapper
       className={open ? "openModal modal" : "modal"}
       styled={styled}
-      data-testid="modal"
     >
       {open ? (
         <div>
@@ -17,7 +16,7 @@ const Modal = ({ open, close, header, check, styleNone, styled, children }) => {
             <header>{header}</header>
             <Main styleNone={styleNone}>{children}</Main>
             <footer>
-              <Button onClick={close} styled={styled}>
+              <Button data-testid="closeButton" onClick={close} styled={styled}>
                 {check}
               </Button>
             </footer>
