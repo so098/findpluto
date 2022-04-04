@@ -18,14 +18,16 @@
 <br/>
 
 ---
-## prototype
-<img width="1000" alt="script image" src="https://user-images.githubusercontent.com/58973928/158778354-1cde993f-068a-4556-bf3e-141c209e40bb.png" >
+## 기술 명세
+|Client|Common|
+|-----  | -----|
+| React| client: Netlify |
+| react-three  | fiber / drei / cannon  |
+| three | Prettier |
+| Zustand | Eslint |  |
+| Styled-component |
 
-#### 대본게임을 위한 대본입니다 선택에 따라 다른 선택지가 나오는 것을 알 수 있습니다.
-<br/>
-<img width="1000" alt="location image" src="https://user-images.githubusercontent.com/58973928/158778834-6cc3820a-4a2f-4fe3-b7bb-8d68c84658a9.png" >
 
-#### 명왕성에 좌표를 찍을 때 적어두었던 위치 값입니다 현재는 로직이 변경되어 변경된 값들이 많으나, 초반에 랜덤으로 설정하기 위해 미리 세팅해두었습니다.
 ___
 ## 소개
 <br/>
@@ -67,18 +69,7 @@ ___
 #### 실패시 뜨는 화면입니다. 
 
 ---
-## 기술 명세
-|Client|Common|
-|-----  | -----|
-| React| client: Netlify |
-| react-three  | fiber / drei / cannon  |
-| three | Prettier |
-| Zustand | Eslint |  |
-| Styled-component |
 
-<br/><br/><br/>
-
----
 ## 스케줄
 
 ### [ 22년 2월 21일 - 22년 2월 27일 ]
@@ -98,7 +89,17 @@ ___
 * 테스트 코드 작성
 * 리팩토링 및 리드미 작성
 
+
+---
+
+## prototype
+<img width="1000" alt="script image" src="https://user-images.githubusercontent.com/58973928/158778354-1cde993f-068a-4556-bf3e-141c209e40bb.png" >
+
+#### 대본게임을 위한 대본입니다 선택에 따라 다른 선택지가 나오는 것을 알 수 있습니다.
 <br/>
+<img width="1000" alt="location image" src="https://user-images.githubusercontent.com/58973928/158778834-6cc3820a-4a2f-4fe3-b7bb-8d68c84658a9.png" >
+
+#### 명왕성에 좌표를 찍을 때 적어두었던 위치 값입니다 현재는 로직이 변경되어 변경된 값들이 많으나, 초반에 랜덤으로 설정하기 위해 미리 세팅해두었습니다.
 
 ---
 ## 마무리
