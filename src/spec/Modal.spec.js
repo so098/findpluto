@@ -16,7 +16,7 @@ describe("<Modal/>", () => {
     customRender(<Modal />);
   });
 
-  it("Modal button을 클릭하면 닫힌다..", () => {
+  it("Modal button을 클릭하면 닫힌다.", () => {
     const { getByTestId } = customRender(<Modal close={close} check={check} />);
     const smallEl = getByTestId("closeButton");
     expect(smallEl).toBeInTheDocument();
